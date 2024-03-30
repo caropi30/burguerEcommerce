@@ -1,0 +1,46 @@
+[
+    {
+        "id": "individuales",
+        "title": "individuales",
+        "icon": "😎",
+        "subcategories": [
+            {
+                "id": "hamburguesa",
+                "title": "hamburguesa",
+                "icon": "🍔"
+            },
+            {
+                "id": "bebidas",
+                "title": "bebidas",
+                "icon": "🥤"
+            },
+            {
+                "id": "papas",
+                "title": "papas",
+                "icon": "🍟"
+            }
+        ]
+    },
+    {
+        "id": "combos",
+        "title": "combos",
+        "icon": "😍😋😜",
+        "subcategories": [
+            {
+                "id": "combo1",
+                "title": "combo 1",
+                "icon": "🍔🍟"
+            },
+            {
+                "id": "combo2",
+                "title": "combo 2",
+                "icon": "🍔🍟"
+            },
+            {
+                "id": "combo3",
+                "title": "combo 3",
+                "icon": "🍔🍟"
+            }
+        ]
+    }
+]

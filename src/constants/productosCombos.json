@@ -1,0 +1,59 @@
+[
+    {
+        "id": "combo1",
+        "title": "Combo 1",
+        "icon": "🍔🍟🥤",
+        "items": {
+            "hamburguesa": {
+                "name": "Hambuguesa",
+                "proteina": "carne",
+                "vegetales": [
+                    "Lechuga",
+                    "tomate",
+                    "cebolla",
+                    "pepinillos"
+                ]
+            },
+            "papas": {
+                "name": "Papas fritas",
+                "tipo": "rústicas",
+                "salsa": "ketchup"
+            },
+            "bebida": {
+                "name": "Bebida",
+                "brand": "Coca cola"
+            }
+        },
+        "precio": 8990
+    },
+    {
+        "id": "combo2",
+        "title": "Combo 2",
+        "icon": "😍😋🍔🍟🥤",
+        "items": {
+            "hamburguesa": {
+                "name": "2 Hambuguesas",
+                "proteina": "carne",
+                "vegetales": [
+                    "Lechuga",
+                    "tomate",
+                    "cebolla",
+                    "pepinillos"
+                ]
+            },
+            "papas": {
+                "name": "Papas fritas",
+                "tipo": "rústicas",
+                "salsa": [
+                    "ketchup",
+                    "mayonesa"
+                ]
+            },
+            "bebida": {
+                "name": "2 Bebidas",
+                "brand": "Coca cola"
+            }
+        },
+        "precio": 15990
+    }
+]

@@ -1,0 +1,71 @@
+[
+    {
+        "id": "hamburguesa",
+        "title": "hamburguesa",
+        "icon": "🍔",
+        "items": {
+            "proteinas": [
+                "carne",
+                "pollo",
+                "veggie"
+            ],
+            "vegetales": [
+                "Tomate",
+                "Lechuga",
+                "Cebolla",
+                "Pepinillos",
+                "Champiñoes",
+                "Palta"
+            ],
+            "salsas": [
+                "mayonesa",
+                "ketchup",
+                "mostaza",
+                "bbq"
+            ]
+        },
+        "precio": 5990
+    },
+    {
+        "id": "papas",
+        "title": "papas",
+        "icon": "🍟",
+        "items": {
+            "tipos": [
+                "rústicas",
+                "hilo"
+            ],
+            "tamano": [
+                "pequeñas",
+                "medianas",
+                "grandes"
+            ],
+            "salsas": [
+                "mayonesa",
+                "ketchup",
+                "mostaza",
+                "bbq"
+            ]
+        },
+        "precio": 2990
+    },
+    {
+        "id": "bebida",
+        "title": "bebida",
+        "icon": "🥤",
+        "items": {
+            "bebidas": [
+                "coca cola",
+                "fanta",
+                "sprite",
+                "agua"
+            ],
+            "tamano": [
+                "pequeña",
+                "mediana",
+                "grande"
+            ]
+        },
+        "precio": 1990
+    }
+]
