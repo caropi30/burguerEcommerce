@@ -24,12 +24,13 @@ const styles = StyleSheet.create({
     btnCart: {
         justifyContent: 'center',
         alignItems: 'center',
+        width: 45,
+        height: 45,
         backgroundColor: ORANGE,
-        borderRadius: 20,
+        borderRadius: 25,
         borderWidth: 1,
         borderColor: ORANGE,
         elevation: 7,
-        padding: 5,
     },
     btnLocation: {
         flexDirection: 'row',

@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import helpersStyle from '../../constants/helpersStyle';
 import useFont from '../../hooks/useFont';
 import CartButton from './components/CartButton';
-import LocationButton from './components/LocationButton';
+import LocationButton from './components/HeaderLocationButton';
 import {
     Placeholder,
     PlaceholderMedia,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: 40,
         paddingBottom: 24,
-        paddingHorizontal: 10,
+        //paddingHorizontal: 10,
         backgroundColor: WHITE,
         borderBottomWidth: 1,
         borderBottomColor: BORDER_GRAY,

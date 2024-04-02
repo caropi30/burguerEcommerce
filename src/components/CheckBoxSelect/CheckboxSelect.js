@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Checkbox from 'expo-checkbox';
 import CheckBoxWithText from './components/CheckBoxWithText';
-import helpersStyle from '../../constants/helpersStyle';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import helpersStyle from '../../constants/helpersStyle';
 import useFont from '../../hooks/useFont';
 
-const { COLORS: { ORANGE, BLACK, GRAY }, FONT_SIZES: { SMALL } } = helpersStyle;
+const { COLORS: { ORANGE }, FONT_SIZES: { SMALL } } = helpersStyle;
 
 const CheckboxSelect = ({ title, checkboxData }) => {
-    console.log('CheckboxSelect', checkboxData)
     const { fontsLoaded } = useFont();
-    const [current, setCurrent] = useState('test2');
-    const [isChecked, setChecked] = useState(false);
+    const [checkboxes, setCheckboxes] = useState(checkboxData);
+    const [selectedItems, setSelectedItems] = useState([]);
 
+    const toggleCheckbox = (id) => {
+        setCheckboxes(checkboxes.map(checkbox => {
+            if (checkbox.id === id) {
+                return { ...checkbox, isChecked: !checkbox.isChecked };
+            }
+            console.log('checkbox else', checkbox)
+            return checkbox;
+        }));
+    };
+
+    useEffect(() => {
+        setSelectedItems(checkboxes.filter(checkbox => checkbox.isChecked === true));
+    }, [checkboxes])
+
+    useEffect(() => {
+        //AQUI IRA EL DISPATCH DE LOS ITEMS SELECCIONADOS
+        console.log('selectedItems', selectedItems)
+    }, [selectedItems])
+
+    console.log('checkboxes', checkboxes)
 
     return (
         <View style={styles.container}>
@@ -21,9 +39,16 @@ const CheckboxSelect = ({ title, checkboxData }) => {
                 <FontAwesome name="circle" size={20} color={ORANGE} />
                 <Text style={styles.title}>{title}</Text>
             </View>
-            {/* {checkboxData?.map(item => <Checkbox key={item.id} style={styles.checkbox} value={isChecked} onValueChange={setChecked} color={ORANGE} />)} */}
-            {checkboxData?.map(item => <CheckBoxWithText key={item} title={item} isChecked={isChecked} setChecked={setChecked} />)}
-        </View>
+            {checkboxes.map(item =>
+                <TouchableOpacity key={item.id} onPress={() => toggleCheckbox(item.id)}>
+                    <CheckBoxWithText
+                        id={item.id}
+                        title={item.title}
+                        value={item.isChecked}
+                        onValueChange={() => toggleCheckbox(item.id)} />
+                </TouchableOpacity>
+            )}
+        </View >
     );
 };
 

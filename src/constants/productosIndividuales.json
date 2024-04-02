@@ -10,18 +10,58 @@
                 "veggie"
             ],
             "vegetales": [
-                "Tomate",
-                "Lechuga",
-                "Cebolla",
-                "Pepinillos",
-                "Champiñoes",
-                "Palta"
+                {
+                    "id": "tomate",
+                    "title": "tomate",
+                    "icon": "🍅"
+                },
+                {
+                    "id": "lechuga",
+                    "title": "lechuga",
+                    "icon": "🥬"
+                },
+                {
+                    "id": "cebolla",
+                    "title": "cebolla",
+                    "icon": "🧅"
+                },
+                {
+                    "id": "pepinillos",
+                    "title": "pepinillos",
+                    "icon": "🥒"
+                },
+                {
+                    "id": "champiñones",
+                    "title": "champiñones",
+                    "icon": "🍄"
+                },
+                {
+                    "id": "palta",
+                    "title": "palta",
+                    "icon": "🥑"
+                }
             ],
             "salsas": [
-                "mayonesa",
-                "ketchup",
-                "mostaza",
-                "bbq"
+                {
+                    "id": "mayonesa",
+                    "title": "mayonesa",
+                    "icon": "🥚"
+                },
+                {
+                    "id": "ketchup",
+                    "title": "ketchup",
+                    "icon": "🍅"
+                },
+                {
+                    "id": "mostaza",
+                    "title": "mostaza",
+                    "icon": "🧅"
+                },
+                {
+                    "id": "bbq",
+                    "title": "bbq",
+                    "icon": "🍖"
+                }
             ]
         },
         "precio": 5990
@@ -36,15 +76,38 @@
                 "hilo"
             ],
             "tamano": [
-                "pequeñas",
-                "medianas",
-                "grandes"
+                {
+                    "id": "pequenas",
+                    "title": "pequenas",
+                    "icon": "🥔"
+                },
+                {
+                    "id": "medianas",
+                    "title": "medianas",
+                    "icon": "🥔🥔"
+                },
+                {
+                    "id": "grandes",
+                    "title": "grandes",
+                    "icon": "🥔🥔🥔"
+                }
             ],
             "salsas": [
-                "mayonesa",
-                "ketchup",
-                "mostaza",
-                "bbq"
+                {
+                    "id": "mayonesa",
+                    "title": "mayonesa",
+                    "icon": "🥚"
+                },
+                {
+                    "id": "ketchup",
+                    "title": "ketchup",
+                    "icon": "🍅"
+                },
+                {
+                    "id": "mostaza",
+                    "title": "mostaza",
+                    "icon": "🧅"
+                }
             ]
         },
         "precio": 2990
@@ -61,9 +124,21 @@
                 "agua"
             ],
             "tamano": [
-                "pequeña",
-                "mediana",
-                "grande"
+                {
+                    "id": "pequenas",
+                    "title": "pequenas",
+                    "icon": "🥤"
+                },
+                {
+                    "id": "medianas",
+                    "title": "medianas",
+                    "icon": "🥤🥤"
+                },
+                {
+                    "id": "grandes",
+                    "title": "grandes",
+                    "icon": "🥤🥤🥤"
+                }
             ]
         },
         "precio": 1990

@@ -37,7 +37,6 @@ const TabNavigation = () => {
             <Tab.Navigator
                 screenOptions={{
                     gestureEnabled: true,
-                    //header: renderHeader,
                 }}
             >
                 <Tab.Screen
@@ -50,7 +49,7 @@ const TabNavigation = () => {
                         tabBarStyle: ((route) => {
                             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
                             console.log(routeName)
-                            if (routeName === 'ProductDetail' || routeName === 'Cart') {
+                            if (routeName === 'ProductDetail' || routeName === 'Cart' || routeName === 'Category') {
                                 return { display: "none" }
                             }
                             return null

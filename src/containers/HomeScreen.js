@@ -30,6 +30,8 @@ const HomeScreen = () => {
         dispatch(setSubcategories(subcategories));
     };
 
+    const loading = false;
+
     const renderSkeleton = () => (
         <View style={styles.container}>
             <Placeholder

@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: SMALL,
         marginBottom: 12,
+        textTransform: 'capitalize',
     },
     emoji: {
         fontSize: XX_LARGE,

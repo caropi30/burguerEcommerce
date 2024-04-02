@@ -8,16 +8,16 @@ import useFilterProductDetail from '../hooks/useFilterProductDetail';
 
 const { COLORS: { ORANGE, BLACK, GRAY }, FONT_SIZES: { SMALL } } = helpersStyle;
 
-const RadioSelect = ({ title, data }) => {
-    console.log('RadioSelect', title, data)
+const RadioSelect = ({ radioTitle, radioData }) => {
     const { fontsLoaded } = useFont();
-    const [current, setCurrent] = useState('test2');
+    const [current, setCurrent] = useState('');
     const { isFetching } = useFilterProductDetail();
+
     return (
         <View>
             <View style={styles.titleContainer}>
                 <FontAwesome name="circle" size={20} color={ORANGE} />
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{radioTitle}</Text>
             </View>
             <RadioButtonGroup
                 containerStyle={styles.radioContainerStyle}
@@ -26,7 +26,14 @@ const RadioSelect = ({ title, data }) => {
                 radioBackground={ORANGE}
                 radioStyle={styles.radioBtn}
             >
-                {data?.map((item, index) => <RadioButtonItem key={index} value={item.value} label={item.label} labelStyle={styles.radioLabel} />)}
+                {radioData?.map((item, index) =>
+                    <RadioButtonItem
+                        key={item}
+                        value={item}
+                        label={
+                            <Text style={styles.radioLabel}>{item}</Text>}
+                    //labelStyle={styles.radioLabel}
+                    />)}
             </RadioButtonGroup>
         </View>
     );
@@ -49,7 +56,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Medium',
         fontSize: SMALL,
         color: GRAY,
-        // textTransform: 'capitalize',
+        textTransform: 'capitalize',
+        paddingLeft: 8,
     },
     radioBtn: {
         borderColor: ORANGE,
@@ -58,5 +66,5 @@ const styles = StyleSheet.create({
     },
     radioContainerStyle: {
         gap: 8
-    }
+    },
 });

@@ -10,35 +10,35 @@ import useFont from '../hooks/useFont';
 
 const { COLORS: { BLACK }, FONT_SIZES: { MEDIUM } } = helpersStyle;
 
-const { PDP: { COMMENT } } = labels;
+const { PDP: { COMMENT, BTN_CART } } = labels;
 
-const ProductDetail = ({ title, icon, radioTitle, checkboxTitle, radioData, checkboxData, secondaryCheckBox, secondaryCheckBoxTitle }) => {
-
-    console.log('ProductDetail', title, icon, radioTitle, checkboxTitle, radioData, 'checkboxData -->', checkboxData, 'secondaryCheckBox -->', secondaryCheckBox, secondaryCheckBoxTitle)
+const ProductDetail = ({ cardTitle, title, icon, radioTitle, checkboxTitle, radioData, checkboxData, secondaryCheckBox, secondaryCheckBoxTitle, price }) => {
     const { fontsLoaded } = useFont();
 
     return (
-        <ScrollView indicatorStyle='white'>
-            <Card itemTitle={title} icon={icon} />
-            <Text style={styles.title}>{title}</Text>
-            {/* {radioData && <RadioSelect title={radioTitle} radioData={radioData} />} */}
-            {checkboxData && <CheckboxSelect title={checkboxTitle} checkboxData={checkboxData} />}
-            {secondaryCheckBox && <CheckboxSelect title={secondaryCheckBoxTitle} checkboxData={secondaryCheckBox} />}
-            <Text style={styles.textComment}>{COMMENT}</Text>
-            <TextInput
-                placeholder="Añadir comentario"
-                placeholderTextColor={BLACK}
-                autoCapitalize="words"
-                caretHidden
-                inputMode="text"
-                maxLength={140}
-                multiline
-                numberOfLines={3}
-                style={styles.textArea}
+        <>
+            <ScrollView indicatorStyle='white'>
+                <Card title={cardTitle} icon={icon} />
+                <Text style={styles.title}>{title}</Text>
+                {radioData && <RadioSelect radioTitle={radioTitle} radioData={radioData} />}
+                {checkboxData && <CheckboxSelect title={checkboxTitle} checkboxData={checkboxData} />}
+                {secondaryCheckBox && <CheckboxSelect title={secondaryCheckBoxTitle} checkboxData={secondaryCheckBox} />}
+                <Text style={styles.textComment}>{COMMENT}</Text>
+                <TextInput
+                    placeholder="Añadir comentario"
+                    placeholderTextColor={BLACK}
+                    autoCapitalize="words"
+                    caretHidden
+                    inputMode="text"
+                    maxLength={140}
+                    multiline
+                    numberOfLines={3}
+                    style={styles.textArea}
 
-            />
-            <RegularButton title="Añadir al carrito" />
-        </ScrollView>
+                />
+            </ScrollView>
+            <RegularButton title={BTN_CART} price={price} />
+        </>
     )
 };
 
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         marginBottom: 10,
-        marginTop: 10,
+        marginTop: 16,
+        fontFamily: 'Montserrat-SemiBold',
         //textTransform: 'capitalize',
     },
     textArea: {
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderColor: BLACK,
         width: '100%',
+        height: 100,
         padding: 10,
         marginTop: 4,
     }

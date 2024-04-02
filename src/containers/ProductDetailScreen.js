@@ -1,50 +1,81 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import RegularButton from '../components/RegularButton';
 import ProductDetail from '../components/ProductDetail';
 import Header from '../components/Header/Header';
-import RegularButton from '../components/RegularButton';
 import helpersStyle from '../constants/helpersStyle';
 import useFilterProductDetail from '../hooks/useFilterProductDetail';
-import { render } from 'react-dom';
+import useGetSubcategories from '../hooks/useGetSubcategories';
+import useGetTitle from '../hooks/useGetTitle';
+import labels from '../constants/labels';
 
 const { COLORS: { WHITE } } = helpersStyle;
 
+const { CATEGORIES, PDP: { HAMBURGUESA, BEBIDAS, PAPAS }, PRODUCT_TYPE: { INDIVIDUALES } } = labels;
+
 const ProductDetailScreen = () => {
+    const { subcategories } = useGetSubcategories();
+    const { title } = useGetTitle();
+    console.log('title PDP', title)
+    console.log('subcategories', subcategories)
     const { filteredProductDetail, isFetching } = useFilterProductDetail();
-    console.log('isFetching PDP', isFetching)
-    console.log('filteredProductDetail PDP', filteredProductDetail)
     const productInfoDetail = filteredProductDetail[0];
     const navigation = useNavigation();
+    const route = useRoute();
+    console.log('route productDetail', route)
 
     const handleNavigation = () => navigation.navigate('Cart', { screen: 'CartScreen' });
 
-    const handleGoBack = () => navigation.navigate('Category', { screen: 'CategoryScreen', });
+    const handleGoBack = () => navigation.navigate('Category', { screen: 'CategoryScreen', title: INDIVIDUALES });
 
     const productInfoDetailId = productInfoDetail?.id;
 
     const renderTypeInfo = () => {
-        console.log('productInfoDetailId renderTypeInfo --->', productInfoDetailId)
-
-        if (productInfoDetailId === 'hamburguesa') {
+        if (productInfoDetailId === CATEGORIES.HAMBURGUESA) {
             return (
                 <ProductDetail
-                    title={productInfoDetail.title}
+                    cardTitle={productInfoDetail?.title}
+                    title={HAMBURGUESA.TITLE}
                     icon={productInfoDetail.icon}
+                    radioTitle={HAMBURGUESA.RADIO_TITLE}
                     radioData={productInfoDetail?.items?.proteinas}
+                    checkboxTitle={HAMBURGUESA.CHECKBOX_TITLE}
                     checkboxData={productInfoDetail?.items?.salsas}
+                    secondaryCheckBoxTitle={HAMBURGUESA.SECONDARY_CHECKBOX_TITLE}
                     secondaryCheckBox={productInfoDetail?.items?.vegetales}
-                    secondaryCheckBoxTitle=""
+                    price={productInfoDetail?.precio}
                 />
             );
         }
 
-        if (productInfoDetailId === 'bebidas') {
-            return <ProductDetail title={productInfoDetail?.title} icon={productInfoDetail?.icon} checkboxData={productInfoDetail?.items?.bebidas} />;
+        if (productInfoDetailId === CATEGORIES.BEBIDAS) {
+            console.log('productInfoDetail BEBIDAS', productInfoDetail)
+            return (
+                <ProductDetail
+                    cardTitle={productInfoDetail?.title}
+                    title={BEBIDAS.TITLE}
+                    icon={productInfoDetail?.icon}
+                    radioTitle={BEBIDAS.RADIO_TITLE}
+                    radioData={productInfoDetail?.items?.bebidas}
+                    price={productInfoDetail?.precio}
+                />
+            );
         }
 
-        if (productInfoDetailId === 'papas') {
-            return <ProductDetail title={productInfoDetail.title} icon={productInfoDetail.icon} checkboxData={productInfoDetail?.items?.tipo} secondaryCheckBox={productInfoDetail?.items?.tamanos} />;
+        if (productInfoDetailId === CATEGORIES.PAPAS) {
+            return (
+                <ProductDetail
+                    cardTitle={productInfoDetail.title}
+                    title={PAPAS.TITLE}
+                    icon={productInfoDetail.icon}
+                    radioTitle={PAPAS.RADIO_TITLE}
+                    radioData={productInfoDetail?.items?.tipos}
+                    checkboxTitle={PAPAS.CHECKBOX_TITLE}
+                    checkboxData={productInfoDetail?.items?.salsas}
+                    price={productInfoDetail?.precio}
+                />
+            );
         }
 
         return <Text>No hay información</Text>
@@ -58,7 +89,8 @@ const ProductDetailScreen = () => {
     return (
         <>
             <Header isHome={false} goBack={handleGoBack} isLoading={isFetching} />
-            {!isFetching ? <View style={styles.container}>{renderTypeInfo()}</View>
+            {!isFetching ?
+                <View style={styles.container}>{renderTypeInfo()}</View>
                 : renderSkeleton()}
         </>
     );

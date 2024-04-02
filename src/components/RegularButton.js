@@ -5,11 +5,11 @@ import useFont from "../hooks/useFont";
 
 const { COLORS: { ORANGE, WHITE, GRAY_MEDIUM } } = helpersStyle;
 
-const RegularButton = ({ onPress, title, isBlocked }) => {
+const RegularButton = ({ onPress, title, disabled, price }) => {
     const { fontsLoaded } = useFont();
     return (
-        <TouchableOpacity style={!isBlocked ? styles.btnCart : styles.btnCartBlocked} onPress={onPress}>
-            <Text style={styles.btnCartTxt}>{title}</Text>
+        <TouchableOpacity style={!disabled ? styles.btnCart : styles.btnDisabled} onPress={onPress}>
+            <Text style={styles.btnCartTxt}>{title} {price && `$${price}`}</Text>
         </TouchableOpacity>
     );
 };
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         textAlign: 'center',
     },
-    btnCartBlocked: {
+    btnDisabled: {
         backgroundColor: GRAY_MEDIUM,
         padding: 10,
         borderRadius: 50,

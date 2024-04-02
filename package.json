@@ -6,10 +6,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "lint:js": "npx eslint src",
-    "lint:js:fix": "npx eslint src --fix",
-    "lint:report": "npx eslint src -o ./eslint-report.json --format json"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.1.3",
