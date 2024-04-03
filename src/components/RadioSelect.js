@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { RadioButtonGroup, RadioButtonItem } from 'expo-radio-button';
-import helpersStyle from '../constants/helpersStyle';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import useFont from '../hooks/useFont';
-import useFilterProductDetail from '../hooks/useFilterProductDetail';
+import React, { useState } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { RadioButtonGroup, RadioButtonItem } from 'expo-radio-button'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
+import useFilterProductDetail from '../hooks/useFilterProductDetail'
 
-const { COLORS: { ORANGE, BLACK, GRAY }, FONT_SIZES: { SMALL } } = helpersStyle;
+const {
+    COLORS: { ORANGE, BLACK, GRAY },
+    FONT_SIZES: { SMALL },
+} = helpersStyle
 
-const RadioSelect = ({ title, data }) => {
-    console.log('RadioSelect', title, data)
-    const { fontsLoaded } = useFont();
-    const [current, setCurrent] = useState('test2');
-    const { isFetching } = useFilterProductDetail();
+const RadioSelect = ({ radioTitle, radioData }) => {
+    const { fontsLoaded } = useFont()
+    const [current, setCurrent] = useState('')
+    const { isFetching } = useFilterProductDetail()
+
     return (
         <View>
             <View style={styles.titleContainer}>
-                <FontAwesome name="circle" size={20} color={ORANGE} />
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{radioTitle}</Text>
             </View>
             <RadioButtonGroup
                 containerStyle={styles.radioContainerStyle}
@@ -26,13 +28,20 @@ const RadioSelect = ({ title, data }) => {
                 radioBackground={ORANGE}
                 radioStyle={styles.radioBtn}
             >
-                {data?.map((item, index) => <RadioButtonItem key={index} value={item.value} label={item.label} labelStyle={styles.radioLabel} />)}
+                {radioData?.map((item, index) => (
+                    <RadioButtonItem
+                        key={item}
+                        value={item}
+                        label={<Text style={styles.radioLabel}>{item}</Text>}
+                        labelStyle={styles.radioLabel}
+                    />
+                ))}
             </RadioButtonGroup>
         </View>
-    );
-};
+    )
+}
 
-export default RadioSelect;
+export default RadioSelect
 
 const styles = StyleSheet.create({
     titleContainer: {
@@ -49,7 +58,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Medium',
         fontSize: SMALL,
         color: GRAY,
-        // textTransform: 'capitalize',
+        textTransform: 'capitalize',
+        paddingLeft: 8,
     },
     radioBtn: {
         borderColor: ORANGE,
@@ -57,6 +67,6 @@ const styles = StyleSheet.create({
         height: 24,
     },
     radioContainerStyle: {
-        gap: 8
-    }
-});
+        gap: 8,
+    },
+})

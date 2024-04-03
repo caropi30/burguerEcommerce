@@ -1,12 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 const AccountScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     const handleNavigation = () => {
-        navigation.navigate('Cart', { screen: 'CartScreen' });
-    };
+        navigation.navigate('Cart', { screen: 'CartScreen' })
+    }
     return (
         <View style={styles.container}>
             <Text>AccountScreen</Text>
@@ -14,8 +14,8 @@ const AccountScreen = () => {
                 <Text>Go to</Text>
             </TouchableOpacity>
         </View>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     radioBtn: {
         backgroundColor: 'lightblue',
-    }
-});
+    },
+})
 
-export default AccountScreen;
+export default AccountScreen

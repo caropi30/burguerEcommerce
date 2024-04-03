@@ -1,20 +1,27 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import helpersStyle from "../constants/helpersStyle";
-import useFont from "../hooks/useFont";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
 
-const { COLORS: { ORANGE, WHITE, GRAY_MEDIUM } } = helpersStyle;
+const {
+    COLORS: { ORANGE, WHITE, GRAY_MEDIUM },
+} = helpersStyle
 
-const RegularButton = ({ onPress, title, isBlocked }) => {
-    const { fontsLoaded } = useFont();
+const RegularButton = ({ onPress, title, disabled, price }) => {
+    const { fontsLoaded } = useFont()
     return (
-        <TouchableOpacity style={!isBlocked ? styles.btnCart : styles.btnCartBlocked} onPress={onPress}>
-            <Text style={styles.btnCartTxt}>{title}</Text>
+        <TouchableOpacity
+            style={!disabled ? styles.btnCart : styles.btnDisabled}
+            onPress={onPress}
+        >
+            <Text style={styles.btnCartTxt}>
+                {title} {price && `$${price}`}
+            </Text>
         </TouchableOpacity>
-    );
-};
+    )
+}
 
-export default RegularButton;
+export default RegularButton
 
 const styles = StyleSheet.create({
     btnCart: {
@@ -30,7 +37,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         textAlign: 'center',
     },
-    btnCartBlocked: {
+    btnDisabled: {
         backgroundColor: GRAY_MEDIUM,
         padding: 10,
         borderRadius: 50,
@@ -38,4 +45,4 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         marginTop: 32,
     },
-});
+})

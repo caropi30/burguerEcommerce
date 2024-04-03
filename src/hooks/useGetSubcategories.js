@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state
 
-const useGetSubcategories = () => {
-    const subcategories = useSelector(mapStateToProps);
-    return subcategories;
-}
+const useGetSubcategories = () => useSelector(mapStateToProps)
 
-export default useGetSubcategories;
+export default useGetSubcategories

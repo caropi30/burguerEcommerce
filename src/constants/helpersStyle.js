@@ -22,7 +22,7 @@ const helpersStyle = {
         SMALL_MEDIUM: 18,
         MEDIUM: 20,
         LARGE: 24,
-        X_LARGE: 20,
+        X_LARGE: 36,
         XX_LARGE: 66,
     },
     FONT_WEIGHTS: {
@@ -31,6 +31,6 @@ const helpersStyle = {
         MEDIUM: '500',
         BOLD: '700',
     },
-};
+}
 
-export default helpersStyle;
+export default helpersStyle
