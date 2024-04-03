@@ -1,24 +1,29 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import helpersStyle from '../../../constants/helpersStyle';
-import useHandleNavigation from '../../../hooks/useHandleNavigation';
+import React from 'react'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import helpersStyle from '../../../constants/helpersStyle'
+import useHandleNavigation from '../../../hooks/useHandleNavigation'
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, GRAY },
-} = helpersStyle;
+} = helpersStyle
 
 const CartButton = () => {
-    const { handleGoCart } = useHandleNavigation();
+    const { handleGoCart } = useHandleNavigation()
 
     return (
         <TouchableOpacity style={styles.btnCart} onPress={handleGoCart}>
-            <Ionicons name="cart-outline" size={24} color={WHITE} style={styles.icon} />
+            <Ionicons
+                name="cart-outline"
+                size={24}
+                color={WHITE}
+                style={styles.icon}
+            />
         </TouchableOpacity>
     )
-};
+}
 
-export default CartButton;
+export default CartButton
 
 const styles = StyleSheet.create({
     btnCart: {
@@ -44,5 +49,5 @@ const styles = StyleSheet.create({
     btnLocationSecondary: {
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
-    }
-});
+    },
+})

@@ -1,10 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const BASE_URL = 'https://burgerecommerce-default-rtdb.firebaseio.com/';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import services from '../constants/services'
 
 export const burgersApi = createApi({
     reducerPath: 'burgersApi',
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+    baseQuery: fetchBaseQuery({ baseUrl: services.BASE_URL }),
     endpoints: (builder) => ({
         getCategories: builder.query({
             query: () => 'categories.json',
@@ -16,6 +15,10 @@ export const burgersApi = createApi({
             query: () => `comboProducts.json`,
         }),
     }),
-});
+})
 
-export const { useGetCategoriesQuery, useGetIndividualProductsQuery, useGetComboProductsQuery } = burgersApi;
+export const {
+    useGetCategoriesQuery,
+    useGetIndividualProductsQuery,
+    useGetComboProductsQuery,
+} = burgersApi

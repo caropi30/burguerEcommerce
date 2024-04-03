@@ -1,35 +1,40 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import RegularButton from '../components/RegularButton';
-import ProductDetail from '../components/ProductDetail';
-import Header from '../components/Header/Header';
-import helpersStyle from '../constants/helpersStyle';
-import useFilterProductDetail from '../hooks/useFilterProductDetail';
-import useGetSubcategories from '../hooks/useGetSubcategories';
-import useGetTitle from '../hooks/useGetTitle';
-import labels from '../constants/labels';
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import ProductDetail from '../components/ProductDetail'
+import Header from '../components/Header/Header'
+import helpersStyle from '../constants/helpersStyle'
+import useFilterProductDetail from '../hooks/useFilterProductDetail'
+import useGetTitle from '../hooks/useGetTitle'
+import labels from '../constants/labels'
 
-const { COLORS: { WHITE } } = helpersStyle;
+const {
+    COLORS: { WHITE },
+} = helpersStyle
 
-const { CATEGORIES, PDP: { HAMBURGUESA, BEBIDAS, PAPAS }, PRODUCT_TYPE: { INDIVIDUALES } } = labels;
+const {
+    CATEGORIES,
+    PDP: { HAMBURGUESA, BEBIDAS, PAPAS },
+    PRODUCT_TYPE: { INDIVIDUALES },
+} = labels
 
 const ProductDetailScreen = () => {
-    const { subcategories } = useGetSubcategories();
-    const { title } = useGetTitle();
-    console.log('title PDP', title)
-    console.log('subcategories', subcategories)
-    const { filteredProductDetail, isFetching } = useFilterProductDetail();
-    const productInfoDetail = filteredProductDetail[0];
-    const navigation = useNavigation();
-    const route = useRoute();
-    console.log('route productDetail', route)
+    const { title } = useGetTitle()
+    const { filteredProductDetail, isFetching } = useFilterProductDetail()
+    const productInfoDetail = filteredProductDetail[0]
+    const navigation = useNavigation()
+    const route = useRoute()
 
-    const handleNavigation = () => navigation.navigate('Cart', { screen: 'CartScreen' });
+    const handleNavigation = () =>
+        navigation.navigate('Cart', { screen: 'CartScreen' })
 
-    const handleGoBack = () => navigation.navigate('Category', { screen: 'CategoryScreen', title: INDIVIDUALES });
+    const handleGoBack = () =>
+        navigation.navigate('Category', {
+            screen: 'CategoryScreen',
+            title: INDIVIDUALES,
+        })
 
-    const productInfoDetailId = productInfoDetail?.id;
+    const productInfoDetailId = productInfoDetail?.id
 
     const renderTypeInfo = () => {
         if (productInfoDetailId === CATEGORIES.HAMBURGUESA) {
@@ -42,15 +47,16 @@ const ProductDetailScreen = () => {
                     radioData={productInfoDetail?.items?.proteinas}
                     checkboxTitle={HAMBURGUESA.CHECKBOX_TITLE}
                     checkboxData={productInfoDetail?.items?.salsas}
-                    secondaryCheckBoxTitle={HAMBURGUESA.SECONDARY_CHECKBOX_TITLE}
+                    secondaryCheckBoxTitle={
+                        HAMBURGUESA.SECONDARY_CHECKBOX_TITLE
+                    }
                     secondaryCheckBox={productInfoDetail?.items?.vegetales}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         if (productInfoDetailId === CATEGORIES.BEBIDAS) {
-            console.log('productInfoDetail BEBIDAS', productInfoDetail)
             return (
                 <ProductDetail
                     cardTitle={productInfoDetail?.title}
@@ -60,7 +66,7 @@ const ProductDetailScreen = () => {
                     radioData={productInfoDetail?.items?.bebidas}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         if (productInfoDetailId === CATEGORIES.PAPAS) {
@@ -75,26 +81,29 @@ const ProductDetailScreen = () => {
                     checkboxData={productInfoDetail?.items?.salsas}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         return <Text>No hay información</Text>
+    }
 
-    };
-
-    const renderSkeleton = () => {
-        return <Text>Loading...</Text >
-    };
+    const renderSkeleton = () => <Text>Cargando...</Text>
 
     return (
         <>
-            <Header isHome={false} goBack={handleGoBack} isLoading={isFetching} />
-            {!isFetching ?
+            <Header
+                isHome={false}
+                goBack={handleGoBack}
+                isLoading={isFetching}
+            />
+            {!isFetching ? (
                 <View style={styles.container}>{renderTypeInfo()}</View>
-                : renderSkeleton()}
+            ) : (
+                renderSkeleton()
+            )}
         </>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -102,6 +111,6 @@ const styles = StyleSheet.create({
         backgroundColor: WHITE,
         padding: 16,
     },
-});
+})
 
-export default ProductDetailScreen;
+export default ProductDetailScreen

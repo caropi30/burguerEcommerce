@@ -1,7 +1,7 @@
 const labels = {
     CATEGORIES: {
         HAMBURGUESA: 'hamburguesa',
-        BEBIDAS: 'bebida',
+        BEBIDAS: 'bebidas',
         PAPAS: 'papas',
     },
     PRODUCT_TYPE: {
@@ -24,7 +24,6 @@ const labels = {
             TITLE: 'Arma tus papas',
             RADIO_TITLE: 'Elige tus papas',
             CHECKBOX_TITLE: 'Elige tus salsas (máx. 2)',
-
         },
         BTN_CART: 'Añadir al carrito',
     },
@@ -46,7 +45,7 @@ const labels = {
         },
         BTN_CONTINUE: 'Continuar',
         BTN_PAGAR: 'Pagar',
-    }
-};
+    },
+}
 
-export default labels;
+export default labels

@@ -1,31 +1,42 @@
-import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import Entypo from '@expo/vector-icons/Entypo';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import helpersStyle from "../constants/helpersStyle";
+import React from 'react'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import Entypo from '@expo/vector-icons/Entypo'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import helpersStyle from '../constants/helpersStyle'
+import useHandleNavigation from '../hooks/useHandleNavigation'
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY, BG_LIGHT_ORANGE },
     FONT_SIZES: { SMALL, MEDIUM, LARGE, XX_LARGE },
-} = helpersStyle;
+} = helpersStyle
 
 const LocationButton = () => {
+    const { handleGoOnboarding } = useHandleNavigation()
     return (
-        <TouchableOpacity style={styles.btnLocation}>
+        <TouchableOpacity
+            style={styles.btnLocation}
+            onPress={handleGoOnboarding}
+        >
             <Entypo name="location" size={24} color={ORANGE} />
             <View style={styles.btnLocationHome}>
                 <View>
                     <Text style={styles.btnLocationTxt}>Entregar en</Text>
-                    <Text style={styles.btnLocationSecondary}>Agrega tu dirección</Text>
+                    <Text style={styles.btnLocationSecondary}>
+                        Agrega tu dirección
+                    </Text>
                 </View>
-                <MaterialCommunityIcons name="pencil-outline" size={24} color={BLACK} style={styles.btnAdd} />
+                <MaterialCommunityIcons
+                    name="pencil-outline"
+                    size={24}
+                    color={BLACK}
+                    style={styles.btnAdd}
+                />
             </View>
         </TouchableOpacity>
-    );
-};
+    )
+}
 
-export default LocationButton;
+export default LocationButton
 
 const styles = StyleSheet.create({
     container: {
@@ -85,5 +96,5 @@ const styles = StyleSheet.create({
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
         fontSize: LARGE,
-    }
-});
+    },
+})

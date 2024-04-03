@@ -1,72 +1,90 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import RadioSelect from "../../RadioSelect";
-import RegularButton from "../../RegularButton";
-import { RadioButtonGroup, RadioButtonItem } from 'expo-radio-button';
-import helpersStyle from '../../../constants/helpersStyle';
-import labels from '../../../constants/labels';
-import useFont from "../../../hooks/useFont";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { RadioButtonItem } from 'expo-radio-button'
+import helpersStyle from '../../../constants/helpersStyle'
+import labels from '../../../constants/labels'
+import useFont from '../../../hooks/useFont'
 
+const {
+    COLORS: { ORANGE, BLACK, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW },
+    FONT_SIZES: { X_SMALL, SMALL, X_LARGE },
+} = helpersStyle
 
-const { COLORS: { ORANGE, BLACK, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW }, FONT_SIZES: { X_SMALL, SMALL, X_LARGE } } = helpersStyle;
+const {
+    COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA },
+} = labels
 
-const { COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA } } = labels;
-const vegetales = [
-    "Lechuga",
-    "tomate",
-    "cebolla",
-    "pepinillos"
-];
-
-const salsas = ['Mayonesa', 'ketchup']
-
-const ComboCard = ({ id, icon }) => {
-    const { fontsLoaded } = useFont();
+const ComboCard = ({
+    id,
+    icon,
+    title,
+    value,
+    burgerTitle,
+    burgerProtein,
+    burgerVegatables,
+    drinkFlavors,
+    drinkTitle,
+    chipsTitle,
+    chipsType,
+    chipsSauce,
+}) => {
+    const { fontsLoaded } = useFont()
     return (
-        <TouchableOpacity style={styles.container}>
+        <View style={styles.container} key={id}>
             <RadioButtonItem
-                key={null}
-                value={null}
+                key={id}
+                value={value}
                 label={
                     <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Combo 1</Text>
-                        <Text style={styles.emoji}>🍔🍟🥤</Text>
+                        <Text style={styles.title}>{title}</Text>
+                        <Text style={styles.emoji}>{icon}</Text>
                     </View>
                 }
                 radioBackground={ORANGE}
-                labelStyle={styles.radioLabel}
+                style={styles.radioBtn}
             />
             <View style={styles.contentContainer}>
                 <View style={styles.subtitleContainer}>
                     <FontAwesome name="circle" size={X_SMALL} color={ORANGE} />
-                    <Text style={styles.title}>Hamburguesa</Text>
+                    <Text style={styles.title}>{burgerTitle}</Text>
                 </View>
                 <View styles={styles.subcontentContainer}>
-                    <Text>{`\u002E ${PROTEINA}`}: Carne</Text>
-                    <Text>{`\u002E ${VEGETALES}`}: {vegetales.join(', ')}</Text>
-                    <Text>{`\u002E ${SALSA}`}: {salsas.join(', ')}</Text>
+                    <Text>
+                        {`\u002E ${PROTEINA}`}: {burgerProtein}
+                    </Text>
+                    <Text>
+                        {`\u002E ${VEGETALES}`}: {burgerVegatables.join(', ')}
+                    </Text>
+                    {/* <Text>{`\u002E ${SALSA}`}: {salsas.join(', ')}</Text> */}
                 </View>
                 <View style={styles.subtitleContainer}>
                     <FontAwesome name="circle" size={X_SMALL} color={ORANGE} />
-                    <Text style={styles.title}>Bebida</Text>
+                    <Text style={styles.title}>{drinkTitle}</Text>
                 </View>
                 <View>
-                    <Text>{`\u002E`} Coca cola</Text>
+                    <Text>
+                        {`\u002E`} {drinkFlavors}
+                    </Text>
                 </View>
                 <View style={styles.subtitleContainer}>
                     <FontAwesome name="circle" size={X_SMALL} color={ORANGE} />
-                    <Text style={styles.title}>Papas</Text>
+                    <Text style={styles.title}>{chipsTitle}</Text>
                 </View>
                 <View>
-                    <Text>{`\u002E Tipo`}:  rústicas</Text>
-                    <Text>{`\u002E Salsa`}:  ketchup</Text>
+                    <Text>
+                        {`\u002E Tipo`}: {chipsType}
+                    </Text>
+                    <Text>
+                        {`\u002E Salsa`}: {chipsSauce}
+                    </Text>
                 </View>
             </View>
-        </TouchableOpacity>)
-};
+        </View>
+    )
+}
 
-export default ComboCard;
+export default ComboCard
 
 const styles = StyleSheet.create({
     container: {
@@ -76,14 +94,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: BORDER_YELLOW,
         borderRadius: 8,
-
     },
     titleContainer: {
         flexDirection: 'row',
         paddingLeft: 8,
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '95%'
+        width: '95%',
     },
     title: {
         fontFamily: 'Montserrat-SemiBold',
@@ -104,7 +121,7 @@ const styles = StyleSheet.create({
     },
     emoji: {
         fontSize: X_LARGE,
-        elevation: 10
+        elevation: 10,
     },
     radioLabel: {
         fontFamily: 'Montserrat-Medium',
@@ -119,6 +136,6 @@ const styles = StyleSheet.create({
         height: 24,
     },
     radioContainerStyle: {
-        gap: 8
+        gap: 8,
     },
-});
+})
