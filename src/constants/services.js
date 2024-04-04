@@ -4,4 +4,4 @@ const services = {
     AUTH_TOKEN: 'accounts:signUp?key=AIzaSyBnTiVs58vUJ4yd_0KyO-lTZ0mlOvpy3AE',
 }
 
-export default services
+export default services;

@@ -1,13 +1,13 @@
-export const POLLO = 'Pollo'
-export const CARNE = 'Carne'
-export const VEGETARIANAS = 'Vegetarianas'
-export const MIXTAS = 'Mixtas'
-export const ACOMPANAMIENTOS = 'Acompañamientos'
-export const PAPAS = 'Papas'
-export const BEBIDAS = 'Bebidas'
-export const COMBO = 'Combo'
-export const INDIVIDUAL = 'Individual'
-export const HAMBURGUESA = 'Hamburguesa'
+export const POLLO = 'Pollo';
+export const CARNE = 'Carne';
+export const VEGETARIANAS = 'Vegetarianas';
+export const MIXTAS = 'Mixtas';
+export const ACOMPANAMIENTOS = 'Acompañamientos';
+export const PAPAS = 'Papas';
+export const BEBIDAS = 'Bebidas';
+export const COMBO = 'Combo';
+export const INDIVIDUAL = 'Individual';
+export const HAMBURGUESA = 'Hamburguesa';
 
 const data = [
     {
@@ -122,6 +122,6 @@ const data = [
         productType: BEBIDAS,
         productCategory: INDIVIDUAL,
     },
-]
+];
 
-export default data
+export default data;

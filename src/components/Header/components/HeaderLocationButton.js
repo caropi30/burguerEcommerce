@@ -1,43 +1,36 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import Feather from 'react-native-vector-icons/Feather'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import LocationButton from '../../LocationButton'
-import helpersStyle from '../../../constants/helpersStyle'
-import useFont from '../../../hooks/useFont'
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
+import LocationButton from '../../LocationButton';
+import helpersStyle from '../../../constants/helpersStyle';
+import useFont from '../../../hooks/useFont';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY, BG_LIGHT_ORANGE },
     FONT_SIZES: { SMALL, MEDIUM, LARGE, XX_LARGE },
-} = helpersStyle
+} = helpersStyle;
 
 const HeaderLocationButton = ({ isHome, goBack, isCart, title }) => {
-    const { fontsLoaded } = useFont()
-    const navigation = useNavigation()
-    const route = useRoute()
+    const { fontsLoaded } = useFont();
+    const navigation = useNavigation();
+    const route = useRoute();
 
     return (
         <View style={styles.container}>
-            {!isHome ? (
+            {!isHome ?
                 <TouchableOpacity style={styles.btnArrow} onPress={goBack}>
-                    <Feather
-                        name="arrow-left"
-                        size={22}
-                        color={ORANGE}
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-            ) : null}
-            {!isCart ? (
-                <LocationButton />
-            ) : (
-                <Text style={styles.cartTitle}>{title}</Text>
-            )}
+                    <Feather name="arrow-left" size={22} color={ORANGE} style={styles.icon} />
+                </TouchableOpacity> : null
+            }
+            {!isCart ?
+                <LocationButton /> : <Text style={styles.cartTitle}>{title}</Text>
+            }
         </View>
     )
-}
+};
 
-export default HeaderLocationButton
+export default HeaderLocationButton;
 
 const styles = StyleSheet.create({
     container: {
@@ -45,6 +38,8 @@ const styles = StyleSheet.create({
         gap: 16,
         backgroundColor: WHITE,
         alignItems: 'center',
+
+
     },
     btnArrow: {
         justifyContent: 'center',
@@ -97,5 +92,6 @@ const styles = StyleSheet.create({
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
         fontSize: LARGE,
-    },
-})
+
+    }
+});

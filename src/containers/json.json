@@ -1,0 +1,181 @@
+{
+    "authApi": {
+        "config": {
+            "focused": true,
+            "invalidationBehavior": "delayed",
+            "keepUnusedDataFor": 60,
+            "middlewareRegistered": true,
+            "online": true,
+            "reducerPath": "authApi",
+            "refetchOnFocus": false,
+            "refetchOnMountOrArgChange": false,
+            "refetchOnReconnect": false
+        },
+        "mutations": {
+            "csZktpibQEaZ8rVTGH81W": [Object
+            ]
+        },
+        "provided": {},
+        "queries": {},
+        "subscriptions": {}
+    },
+    "burgersApi": {
+        "config": {
+            "focused": true,
+            "invalidationBehavior": "delayed",
+            "keepUnusedDataFor": 60,
+            "middlewareRegistered": true,
+            "online": true,
+            "reducerPath": "burgersApi",
+            "refetchOnFocus": false,
+            "refetchOnMountOrArgChange": false,
+            "refetchOnReconnect": false
+        },
+        "mutations": {
+            "sxllUf_HJkX9npd81zTzs": [Object
+            ]
+        },
+        "provided": {},
+        "queries": {
+            "getCategories(undefined)": [Object
+            ],
+            "getUser(undefined)": [Object
+            ]
+        },
+        "subscriptions": {
+            "getCategories(undefined)": [Object
+            ],
+            "getUser(undefined)": [Object
+            ]
+        }
+    },
+    "counter": {
+        "value": 0
+    },
+    "idToken": {
+        "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjgwNzhkMGViNzdhMjdlNGUxMGMzMTFmZTcxZDgwM2I5MmY3NjYwZGYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYnVyZ2VyZWNvbW1lcmNlIiwiYXVkIjoiYnVyZ2VyZWNvbW1lcmNlIiwiYXV0aF90aW1lIjoxNzEyMTk1ODI4LCJ1c2VyX2lkIjoiSFhGZHB3U0pJeGJjVWlYZldBS2pXVU84TDBWMiIsInN1YiI6IkhYRmRwd1NKSXhiY1VpWGZXQUtqV1VPOEwwVjIiLCJpYXQiOjE3MTIxOTU4MjgsImV4cCI6MTcxMjE5OTQyOCwiZW1haWwiOiJwZXJvbEBjbC5jbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJwZXJvbEBjbC5jbCJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.YZP15ulUb8gbd3gOUD7BZyom6rMbIUx-e1IRhArYsDxlawRQXF9bLTJcwdTSDCfe0rMzc7am5zdtig7_rHxCzYpVDJ2H4wKeS2CFtaCZ9bJP_Q3Fdj-Owo3U48c-706L6tQ2TPbP1q14Qre8K5yJ4GGwKXMDAesRMQG_yh6WOrtssJV0aLm7aosAo-CjiTRnvYeo04SeTm4xpq38FdDPf6iKlcp6RT523XosDl4PhIt5XB_HtpCSQRAS3L59klTk8s7QFXReFeSN2dwHavD0pOwnYDpaW5LPtPw_LnyYymw8fRGLJE5q6fF9RmaSpFNLoM_5F4L5REqXqMoz73tg9g"
+    },
+    "productInfo": {
+        "icon": "",
+        "id": "",
+        "title": ""
+    },
+    "productType": [
+        {
+            "category": "Pollo",
+            "id": "1",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 1"
+        },
+        {
+            "category": "Carne",
+            "id": "2",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 2"
+        },
+        {
+            "category": "Carne",
+            "id": "3",
+            "productCategory": "Combo",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 3"
+        },
+        {
+            "category": "Pollo",
+            "id": "4",
+            "productCategory": "Combo",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 4"
+        },
+        {
+            "category": "Carne",
+            "id": "5",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 5"
+        },
+        {
+            "category": "Vegetarianas",
+            "id": "6",
+            "productCategory": "Combo",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 6"
+        },
+        {
+            "category": "Pollo",
+            "id": "7",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 7"
+        },
+        {
+            "category": "Mixtas",
+            "id": "8",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 8"
+        },
+        {
+            "category": "Vegetarianas",
+            "id": "9",
+            "productCategory": "Combo",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 9"
+        },
+        {
+            "category": "Mixtas",
+            "id": "10",
+            "productCategory": "Individual",
+            "productType": "Hamburguesa",
+            "title": "Hamburguesa 10"
+        },
+        {
+            "category": "Papas",
+            "id": "11",
+            "productCategory": "Individual",
+            "productType": "Papas",
+            "title": "Papas 11"
+        },
+        {
+            "category": "Papas",
+            "id": "12",
+            "productCategory": "Individual",
+            "productType": "Papas",
+            "title": "Papas 12"
+        },
+        {
+            "category": "Papas",
+            "id": "13",
+            "productCategory": "Individual",
+            "productType": "Papas",
+            "title": "Papas 13"
+        },
+        {
+            "category": "Bebidas",
+            "id": "14",
+            "productCategory": "Individual",
+            "productType": "Bebidas",
+            "title": "Bebidas 14"
+        },
+        {
+            "category": "Bebidas",
+            "id": "15",
+            "productCategory": "Individual",
+            "productType": "Bebidas",
+            "title": "Bebidas 15"
+        },
+        {
+            "category": "Bebidas",
+            "id": "16",
+            "productCategory": "Individual",
+            "productType": "Bebidas",
+            "title": "Bebidas 16"
+        }
+    ],
+    "subcategories": [],
+    "title": {
+        "title": ""
+    }
+}

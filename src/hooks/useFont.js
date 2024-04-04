@@ -1,4 +1,4 @@
-import { useFonts } from 'expo-font'
+import { useFonts } from 'expo-font';
 
 const useFont = () => {
     const [fontsLoaded] = useFonts({
@@ -8,11 +8,11 @@ const useFont = () => {
         'Montserrat-Medium': require('../../assets/fonts/Montserrat-Medium.ttf'),
         'Montserrat-Thin': require('../../assets/fonts/Montserrat-Thin.ttf'),
         'Montserrat-SemiBold': require('../../assets/fonts/Montserrat-SemiBold.ttf'),
-    })
+    });
 
     return {
         fontsLoaded,
-    }
-}
+    };
+};
 
-export default useFont
+export default useFont;

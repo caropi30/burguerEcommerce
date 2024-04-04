@@ -1,73 +1,36 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
-import Input from '../Input'
-import useFont from '../../hooks/useFont'
-import labels from '../../constants/labels'
-import helpersStyle from '../../constants/helpersStyle'
-import RegularButton from '../RegularButton'
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Input from '../Input';
+import useFont from '../../hooks/useFont';
+import labels from '../../constants/labels';
+import helpersStyle from '../../constants/helpersStyle';
+import RegularButton from '../RegularButton';
 
-const {
-    COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK },
-    FONT_SIZES: { SMALL, LARGE },
-} = helpersStyle
+const { COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK }, FONT_SIZES: { SMALL, LARGE } } = helpersStyle;
 
-const Step1 = ({
-    name,
-    handleName,
-    email,
-    handleEmail,
-    phone,
-    handlePhone,
-    handleStep,
-}) => {
-    const { fontLoaded } = useFont()
+const Step1 = ({ name, handleName, email, handleEmail, phone, handlePhone, handleStep }) => {
+    const { fontLoaded } = useFont();
 
     return (
         <>
             <View style={styles.container}>
-                <Input
-                    label="¿Cómo te llamas?"
-                    onChangeText={(e) => handleName(e)}
-                    value={name}
-                    onFocus
-                    placeholder="name"
-                >
+                <Input label="¿Cómo te llamas?" onChangeText={(e) => handleName(e)} value={name} onFocus placeholder='name'>
                     <AntDesign name="user" size={25} color={ORANGE} />
                 </Input>
-                <Input
-                    label="¿Cuál es tu email?"
-                    onChangeText={(e) => handleEmail(e)}
-                    value={email}
-                    onFocus
-                    placeholder="email"
-                >
-                    <MaterialCommunityIcons
-                        name="email-fast-outline"
-                        size={25}
-                        color={ORANGE}
-                    />
-                </Input>
-                <Input
-                    label="¿Cuál es tu teléfono?"
-                    onChangeText={(e) => handlePhone(e)}
-                    value={phone}
-                    onFocus
-                    placeholder="phone"
-                >
-                    <SimpleLineIcons
-                        name="screen-smartphone"
-                        size={25}
-                        color={ORANGE}
-                    />
-                </Input>
-            </View>
+                <Input label="¿Cuál es tu email?" onChangeText={(e) => handleEmail(e)} value={email} onFocus placeholder='email' >
+                    <MaterialCommunityIcons name="email-fast-outline" size={25} color={ORANGE} />
+                </Input >
+                <Input label="¿Cuál es tu teléfono?" onChangeText={(e) => handlePhone(e)} value={phone} onFocus placeholder='phone' >
+                    <SimpleLineIcons name="screen-smartphone" size={25} color={ORANGE} />
+                </Input >
+            </View >
             <RegularButton title="Continuar" onPress={handleStep} />
         </>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -78,7 +41,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-SemiBold',
         fontSize: SMALL,
         color: DARK_GRAY,
-        textAlign: 'left',
+        textAlign: 'left'
     },
     input: {
         flexDirection: 'row',
@@ -89,6 +52,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 12,
     },
-})
+});
 
-export default Step1
+export default Step1;

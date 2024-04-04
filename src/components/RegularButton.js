@@ -1,27 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import helpersStyle from '../constants/helpersStyle'
-import useFont from '../hooks/useFont'
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import helpersStyle from "../constants/helpersStyle";
+import useFont from "../hooks/useFont";
 
-const {
-    COLORS: { ORANGE, WHITE, GRAY_MEDIUM },
-} = helpersStyle
+const { COLORS: { ORANGE, WHITE, GRAY_MEDIUM } } = helpersStyle;
 
 const RegularButton = ({ onPress, title, disabled, price }) => {
-    const { fontsLoaded } = useFont()
+    const { fontsLoaded } = useFont();
     return (
-        <TouchableOpacity
-            style={!disabled ? styles.btnCart : styles.btnDisabled}
-            onPress={onPress}
-        >
-            <Text style={styles.btnCartTxt}>
-                {title} {price && `$${price}`}
-            </Text>
+        <TouchableOpacity style={!disabled ? styles.btnCart : styles.btnDisabled} onPress={onPress}>
+            <Text style={styles.btnCartTxt}>{title} {price && `$${price}`}</Text>
         </TouchableOpacity>
-    )
-}
+    );
+};
 
-export default RegularButton
+export default RegularButton;
 
 const styles = StyleSheet.create({
     btnCart: {
@@ -45,4 +38,4 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         marginTop: 32,
     },
-})
+});

@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const mapStateToProps = (state) => {
-    const { title } = state
-    return title
-}
+    const { title } = state;
+    return title;
+};
 
-const useGetTitle = () => useSelector(mapStateToProps)
+const useGetTitle = () => useSelector(mapStateToProps);
 
-export default useGetTitle
+export default useGetTitle;

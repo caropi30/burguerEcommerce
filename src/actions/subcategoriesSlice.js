@@ -1,16 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 export const subcategoriesSlice = createSlice({
     name: 'subcategories',
     initialState: [],
     reducers: {
         setSubcategories: (state, action) => {
-            const newData = action.payload.map((item) => ({ ...item }))
+            const newData = action.payload.map((item) => {
+                return { ...item }
+            });
             return [...newData]
-        },
+        }
     },
-})
+});
 
-export const { setSubcategories } = subcategoriesSlice.actions
+export const { setSubcategories } = subcategoriesSlice.actions;
 
-export default subcategoriesSlice.reducer
+export default subcategoriesSlice.reducer;

@@ -1,51 +1,31 @@
-import React from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    TextInput,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import useFont from '../hooks/useFont'
-import labels from '../constants/labels'
-import helpersStyle from '../constants/helpersStyle'
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import useFont from '../hooks/useFont';
+import labels from '../constants/labels';
+import helpersStyle from '../constants/helpersStyle';
 
-const {
-    COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK, WHITE },
-    FONT_SIZES: { SMALL, LARGE },
-} = helpersStyle
+const { COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK, WHITE }, FONT_SIZES: { SMALL, LARGE } } = helpersStyle;
 
-const Input = ({
-    label,
-    children,
-    onChangeText,
-    value,
-    placeholder,
-    isError,
-}) => {
-    const { fontLoaded } = useFont()
-    const navigation = useNavigation()
+const Input = ({ label, children, onChangeText, value, placeholder, isError, isSecure }) => {
+    const { fontLoaded } = useFont();
+    const navigation = useNavigation();
     const handleNavigation = () => {
-        navigation.navigate('HomeStack', { screen: 'HomeScreen' })
-    }
+        navigation.navigate('HomeStack', { screen: 'HomeScreen' });
+    };
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{label}</Text>
             <View style={styles.input}>
-                <TextInput
-                    onChangeText={onChangeText}
-                    value={value}
-                    placeholder={placeholder}
-                />
+                <TextInput onChangeText={onChangeText} secureTextEntry={isSecure} value={value} placeholder={placeholder} />
                 {children}
             </View>
             {isError ? <Text style={styles.error}>{isError}</Text> : null}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -69,6 +49,6 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 16,
     },
-})
+});
 
-export default Input
+export default Input;

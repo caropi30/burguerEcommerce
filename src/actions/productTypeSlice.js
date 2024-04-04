@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import data from '../constants/data'
+import { createSlice } from '@reduxjs/toolkit';
+import data from '../constants/data';
 
 export const productTypeSlice = createSlice({
     name: 'productType',
@@ -7,8 +7,8 @@ export const productTypeSlice = createSlice({
     reducers: {
         setProductType: (state) => state.filter((item) => item.productType),
     },
-})
+});
 
-export const { setProductType } = productTypeSlice.actions
+export const { setProductType } = productTypeSlice.actions;
 
-export default productTypeSlice.reducer
+export default productTypeSlice.reducer;
