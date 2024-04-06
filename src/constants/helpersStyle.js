@@ -23,6 +23,7 @@ const helpersStyle = {
         MEDIUM: 20,
         LARGE: 24,
         X_LARGE: 36,
+        MEDIUM_LARGE: 50,
         XX_LARGE: 66,
     },
     FONT_WEIGHTS: {

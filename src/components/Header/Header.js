@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import helpersStyle from '../../constants/helpersStyle';
 import useFont from '../../hooks/useFont';
 import CartButton from './components/CartButton';
@@ -40,7 +39,7 @@ const Header = ({ isHome, isLoading, goBack, isCart, title, isOnboarding }) => {
 
     const renderContent = () => (
         <View style={styles.container}>
-            <View style={styles.subcontainer}>
+            <View style={!isOnboarding ? styles.subcontainer : styles.subcontainerOnboarding}>
                 <LocationButton isHome={isHome} goBack={goBack} isCart={isCart} title={title} />
                 {!isCart && < CartButton />}
             </View>
@@ -69,10 +68,18 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: 40,
         paddingBottom: 24,
-        //paddingHorizontal: 10,
         backgroundColor: WHITE,
         borderBottomWidth: 1,
         borderBottomColor: BORDER_GRAY,
+    },
+    subcontainerOnboarding: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        paddingTop: 40,
+        paddingBottom: 24,
+        backgroundColor: WHITE,
     },
     skeletonSubcontainer: {
         width: '100%',

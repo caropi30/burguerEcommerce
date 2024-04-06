@@ -8,9 +8,9 @@ const useHandleNavigation = () => {
         navigation.navigate('HomeStack', { screen: 'HomeScreen' });
     };
 
-    const handleGoCategory = () => navigation.navigate('Category', { screen: 'CategoryScreen' });
+    const handleGoCategory = (params) => navigation.navigate('Category', { screen: 'CategoryScreen', ...params });
 
-    const handleGoCart = () => navigation.navigate('Cart', { screen: 'CartScreen', });
+    const handleGoCart = (params) => navigation.navigate('Cart', { screen: 'CartScreen', ...params });
 
     const handleProductDetail = () => navigation.navigate('ProductDetail', { screen: 'ProductDetailScreen' });
 
@@ -22,7 +22,7 @@ const useHandleNavigation = () => {
 
     const handleGoLogin = () => navigation.navigate('Login', { screen: 'LoginScreen' });
 
-    return { handleGoAccount, handleGoCategory, handleGoCart, handleGoHome, handleProductDetail, handleGoOnboarding };
+    return { handleGoAccount, handleGoCategory, handleGoCart, handleGoHome, handleProductDetail, handleGoOnboarding, handleGoLocation, handleGoLogin };
 };
 
 export default useHandleNavigation;

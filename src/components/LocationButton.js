@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import helpersStyle from "../constants/helpersStyle";
 import useHandleNavigation from "../hooks/useHandleNavigation";
+import useIdToken from "../hooks/useIdToken";
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY, BG_LIGHT_ORANGE },
@@ -12,14 +12,18 @@ const {
 } = helpersStyle;
 
 const LocationButton = () => {
-    const { handleGoOnboarding } = useHandleNavigation();
+    const { handleGoLocation } = useHandleNavigation();
+    const { addressIdToken: { street } } = useIdToken();
+    // console.log('LocationButton addressIdToken ----->', addressIdToken)
+    // console.log('LocationButton street ----->', street)
+
     return (
-        <TouchableOpacity style={styles.btnLocation} onPress={handleGoOnboarding}>
+        <TouchableOpacity style={styles.btnLocation} onPress={handleGoLocation}>
             <Entypo name="location" size={24} color={ORANGE} />
             <View style={styles.btnLocationHome}>
                 <View>
                     <Text style={styles.btnLocationTxt}>Entregar en</Text>
-                    <Text style={styles.btnLocationSecondary}>Agrega tu dirección</Text>
+                    <Text style={styles.btnLocationSecondary}>{!street ? 'Agrega tu dirección' : street}</Text>
                 </View>
                 <MaterialCommunityIcons name="pencil-outline" size={24} color={BLACK} style={styles.btnAdd} />
             </View>

@@ -18,7 +18,6 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
 
-
     const renderHomeIcon = () => (
         <TabButton title="Inicio">
             <Ionicons name="home-outline" size={25} color={ORANGE} />
@@ -26,9 +25,8 @@ const TabNavigation = () => {
 
     );
 
-
     const renderUserIcon = () => (
-        <TabButton title="Cuenta">
+        <TabButton title="Mi Cuenta">
             <AntDesign name="user" size={25} color={ORANGE} />
         </TabButton>
     );
@@ -48,8 +46,7 @@ const TabNavigation = () => {
                     tabBarIcon: renderHomeIcon,
                     tabBarStyle: ((route) => {
                         const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-                        console.log(routeName)
-                        if (routeName === 'ProductDetail' || routeName === 'Cart' || routeName === 'Category' || routeName === 'Onboarding' || routeName === 'Login') {
+                        if (routeName === 'ProductDetail' || routeName === 'Cart' || routeName === 'Category' || routeName === 'Onboarding' || routeName === 'Login' || routeName === 'Location') {
                             return { display: "none" }
                         }
                         return null

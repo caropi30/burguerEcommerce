@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useFont from '../hooks/useFont';
 import helpersStyle from '../constants/helpersStyle';
 import { setSubcategories } from '../actions/subcategoriesSlice';
 import Card from '../components/Card';
 import Header from '../components/Header/Header';
 import { useGetCategoriesQuery, useGetUserQuery } from '../../src/services/burgersApi';
+import useHandleNavigation from '../hooks/useHandleNavigation';
 import {
     Placeholder,
     PlaceholderMedia,
@@ -23,25 +24,21 @@ const {
 } = helpersStyle;
 
 const HomeScreen = () => {
-    const tokenId = useIdToken();
-    console.log('tokenId HOME', tokenId);
-    const { data, isLoading } = useGetCategoriesQuery();
-    const { data: user } = useGetUserQuery();
-    const users = [user];
-    // console.log('user', [user]);
+    const [filteredData, setFilteredData] = useState([]);
+    const { data: subcategories, isLoading } = useGetCategoriesQuery();
+    const { data: user, isLoading: isLoadingUser } = useGetUserQuery();
+    const { handleGoCategory } = useHandleNavigation();
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const { fontsLoaded } = useFont();
+    const { name, token } = useIdToken();
+
+
     const handleCategoryFilter = (title, subcategories) => {
-        navigation.navigate('Category', { title, subcategories });
+        handleGoCategory({ title, subcategories });
         dispatch(setSubcategories(subcategories));
     };
 
-    const watchUsers = () => {
-        users.forEach((e) => console.log(e));
-    }
-
-    const loading = false;
 
     const renderSkeleton = () => (
         <View style={styles.container}>
@@ -61,15 +58,14 @@ const HomeScreen = () => {
 
     const renderContent = () => (
         <View style={styles.container} >
-            <Text style={styles.userTxt}>Hola, Caro</Text>
+            <Text style={styles.userTxt}>Hola! {name}</Text>
             <View style={styles.info}>
                 <Text style={styles.title}>¿Qué te provoca hoy?</Text>
                 <Text style={styles.paragraph}>Escoge entre nuestras opciones individuales y combos</Text>
             </View>
             <>
-                {data.map(item => <Card key={item.id} title={item.title} icon={item.icon} onPress={() => handleCategoryFilter(item.title, item.subcategories)} />)}
+                {subcategories.map(item => <Card key={item.id} title={item.title} icon={item.icon} onPress={() => handleCategoryFilter(item.title, item.subcategories)} />)}
             </>
-            <RegularButton title="Ver carrito" onPress={watchUsers} />
         </View >
     );
 
@@ -77,7 +73,6 @@ const HomeScreen = () => {
         <>
             <Header isHome={true} isLoading={isLoading} />
             {isLoading ? renderSkeleton() : renderContent()}
-
         </>
     );
 };

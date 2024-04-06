@@ -7,7 +7,7 @@ import useFont from '../hooks/useFont';
 import labels from '../constants/labels';
 import helpersStyle from '../constants/helpersStyle';
 
-const { COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK, WHITE }, FONT_SIZES: { SMALL, LARGE } } = helpersStyle;
+const { COLORS: { DARK_GRAY }, FONT_SIZES: { SMALL } } = helpersStyle;
 
 const Input = ({ label, children, onChangeText, value, placeholder, isError, isSecure }) => {
     const { fontLoaded } = useFont();

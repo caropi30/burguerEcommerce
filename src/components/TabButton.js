@@ -15,16 +15,18 @@ const TabButton = ({ onPress, children, title }) => {
     const { fontsLoaded } = useFont();
 
     const renderSkeleton = () => {
-        <Placeholder
-            Animation={Fade}
-            Right={props => (
-                <PlaceholderMedia
-                    isRound={true}
-                />
-            )}
-        >
-            <PlaceholderLine width={10} style={styles.skeletonHeight} />
-        </Placeholder>
+        return (
+            <Placeholder
+                Animation={Fade}
+                Right={props => (
+                    <PlaceholderMedia
+                        isRound={true}
+                    />
+                )}
+            >
+                <PlaceholderLine width={10} style={styles.skeletonHeight} />
+            </Placeholder>
+        )
     };
 
     const renderContent = () => (
@@ -48,6 +50,6 @@ const styles = StyleSheet.create({
     },
     btnTabTxt: {
         fontSize: SMALL_MEDIUM,
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'Montserrat-SemiBold',
     },
 });

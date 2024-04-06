@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Card from '../components/Card';
-import ComboCard from '../components/ComboDetail/components/ComboCard';
+import RegularButton from '../components/RegularButton';
 import ComboDetail from '../components/ComboDetail/ComboDetail';
 import { useRoute } from '@react-navigation/native';
 import useFont from '../hooks/useFont';
@@ -17,7 +17,9 @@ const { COLORS: { WHITE } } = helpersStyle;
 const { PRODUCT_TYPE: { INDIVIDUALES } } = labels;
 
 const CategoryScreen = () => {
-    const { handleGoHome, handleProductDetail } = useHandleNavigation();
+    const [price, setPrice] = useState(0)
+    console.log('price categoryScreen', price)
+    const { handleGoHome, handleProductDetail, handleGoCart } = useHandleNavigation();
     const { subcategories } = useGetSubcategories();
     const { data: comboData, isError, isFetching: isFetchingComboData, isSuccess } = useGetComboProductsQuery();
     const { fontsLoaded } = useFont();
@@ -25,10 +27,7 @@ const CategoryScreen = () => {
     const data = route?.params?.subcategories;
     const title = route?.params?.title;
 
-
-    const handleNavigation = async () => {
-        await navigation.navigate('ProductDetail');
-    };
+    const comboPaymentButton = `Añadir al carrito ${price !== 0 ? `$${price}` : ''}`;
 
     return (
         <>
@@ -39,11 +38,16 @@ const CategoryScreen = () => {
                     <FlatList
                         data={subcategories}
                         renderItem={({ item }) => (
-                            <Card id={item.id} title={item.title} icon={item.icon} onPress={handleProductDetail} />
+                            <Card id={item.id} title={item.title} icon={item.icon} price={item.price} onPress={handleProductDetail} />
                         )}
                         keyExtractor={(item) => item.id}
                     />
-                ) : <ComboDetail data={comboData} isFetching={isFetchingComboData} />}
+                ) : <>
+                    <ComboDetail data={comboData} isFetching={isFetchingComboData} setPrice={setPrice} />
+                    <View style={styles.paymentBtn}>
+                        <RegularButton title={comboPaymentButton} onPress={handleGoCart} primary />
+                    </View>
+                </>}
             </View>
         </>
     );
@@ -65,6 +69,12 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         textTransform: 'capitalize',
     },
+    paymentBtn: {
+        marginTop: 0,
+        paddingHorizontal: 16,
+        paddingBottom: 20,
+        backgroundColor: WHITE,
+    }
 });
 
 export default CategoryScreen;

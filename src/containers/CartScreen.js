@@ -9,6 +9,8 @@ import CartResumen from '../components/Cart/CartResumen';
 import helpersStyle from '../constants/helpersStyle';
 import labels from '../constants/labels';
 import useHandleNavigation from '../hooks/useHandleNavigation';
+import useGetCart from '../hooks/useGetCart';
+import useGetProductInfo from '../hooks/useGetProductInfo';
 
 const { COLORS: { WHITE } } = helpersStyle;
 
@@ -16,6 +18,10 @@ const { CART_SCREEN: { HEADER_CARRITO, HEADER: { CARRITO, PAGO }, BTN_CONTINUE, 
 
 const CartScreen = () => {
     const [payment, setPayment] = useState(false);
+    const { productInfo } = useGetProductInfo();
+    console.log('productInfo', productInfo)
+    const { cart } = useGetCart();
+    console.log('cart cart', cart)
     const { handleGoHome } = useHandleNavigation();
     const navigation = useNavigation();
     const handleNavigation = () => {
@@ -41,10 +47,14 @@ const CartScreen = () => {
     return (
         <>
             <Header isCart={true} title={!payment ? CARRITO : PAGO} goBack={!payment ? handleGoHome : handleGoBack} />
-            <ScrollView style={styles.container}>
-                {!payment ? <CartItemList /> : <CartResumen />}
-                <RegularButton onPress={!payment ? handleContinue : handlePagar} title={!payment ? BTN_CONTINUE : BTN_PAGAR} />
-            </ScrollView>
+            <View style={styles.container}>
+                <View >
+                    {!payment ? <CartItemList data={cart.items.length <= 0 ? null : cart.items} quantityController={true} /> : <CartResumen />}
+                </View>
+                <View style={styles.paymentBtn}>
+                    <RegularButton onPress={!payment ? handleContinue : handlePagar} title={!payment ? BTN_CONTINUE : BTN_PAGAR} primary />
+                </View>
+            </View>
         </>
     );
 };
@@ -56,6 +66,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 32,
     },
+    paymentBtn: {
+        backgroundColor: WHITE,
+        marginTop: 32,
+        //paddingHorizontal: 16,
+        paddingBottom: 20,
+    }
 });
 
 export default CartScreen;

@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import helperStyle from '../../constants/helpersStyle';
 import useFont from '../../hooks/useFont';
 
-const { COLORS: { BORDER_YELLOW, BG_LIGHT_ORANGE, ORANGE }, FONT_SIZES: { X_SMALL, SMALL, SMALL_MEDIUM, MEDIUM, LARGE } } = helperStyle;
+const { COLORS: { BORDER_YELLOW, BG_LIGHT_ORANGE, ORANGE }, FONT_SIZES: { X_SMALL, SMALL, MEDIUM_LARGE, MEDIUM, LARGE } } = helperStyle;
 
-const CartItem = ({ icon, title, price, quantityController }) => {
+const CartItem = ({ icon, title, price, quantity, quantityController, addItem, substractItem, radioValue }) => {
     const { fontsLoaded } = useFont();
 
     return (
@@ -13,23 +13,24 @@ const CartItem = ({ icon, title, price, quantityController }) => {
             <View style={styles.content}>
                 <View style={styles.priceContent}>
                     <View style={styles.icon}>
-                        <Text style={[styles.iconText, icon?.length <= 2 ? styles.iconLarge : styles.iconSmall]}>{icon}</Text>
+                        <Text style={[styles.iconText, styles.iconLarge, icon?.length <= 2 ? styles.iconLarge : styles.iconSmall]}>{icon}</Text>
                     </View>
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceName}>{title}</Text>
+                        {radioValue && <Text style={styles.priceRadioValue}>{radioValue}</Text>}
                         <Text style={styles.priceText}>${price}</Text>
                     </View>
                 </View>
                 {quantityController && (
                     <View>
                         <View style={styles.controller}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={substractItem}>
                                 <Text style={styles.controllerItemTxt}>-</Text>
                             </TouchableOpacity>
                             <TouchableOpacity>
-                                <Text style={styles.controllerItemTxt}>1</Text>
+                                <Text style={styles.controllerItemTxt}>{quantity}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={addItem}>
                                 <Text style={styles.controllerItemTxt}>+</Text>
                             </TouchableOpacity>
                         </View>
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
         lineHeight: 20,
     },
     iconLarge: {
-        fontSize: LARGE
+        fontSize: MEDIUM_LARGE,
     },
     priceContent: {
         flexDirection: 'row'
@@ -84,8 +85,14 @@ const styles = StyleSheet.create({
     },
     priceName: {
         fontFamily: 'Montserrat-SemiBold',
-        fontSize: SMALL_MEDIUM,
-        marginBottom: 8
+        fontSize: SMALL,
+        textTransform: 'capitalize',
+    },
+    priceRadioValue: {
+        fontFamily: 'Montserrat-Light',
+        fontSize: 12,
+        marginBottom: 4,
+        textTransform: 'capitalize',
     },
     priceText: {
         fontFamily: 'Montserrat-SemiBold',
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
         width: 144
     },
     controllerItemTxt: {
-        fontSize: LARGE,
+        fontSize: MEDIUM,
         fontFamily: 'Montserrat-Medium',
         lineHeight: 22,
     }

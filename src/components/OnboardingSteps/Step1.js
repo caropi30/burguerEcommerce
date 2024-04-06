@@ -9,7 +9,7 @@ import labels from '../../constants/labels';
 import helpersStyle from '../../constants/helpersStyle';
 import RegularButton from '../RegularButton';
 
-const { COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK }, FONT_SIZES: { SMALL, LARGE } } = helpersStyle;
+const { COLORS: { DARK_GRAY, ORANGE }, FONT_SIZES: { SMALL, LARGE } } = helpersStyle;
 
 const Step1 = ({ name, handleName, email, handleEmail, phone, handlePhone, handleStep }) => {
     const { fontLoaded } = useFont();
@@ -27,7 +27,7 @@ const Step1 = ({ name, handleName, email, handleEmail, phone, handlePhone, handl
                     <SimpleLineIcons name="screen-smartphone" size={25} color={ORANGE} />
                 </Input >
             </View >
-            <RegularButton title="Continuar" onPress={handleStep} />
+            <RegularButton title="Continuar" onPress={handleStep} primary />
         </>
     );
 };

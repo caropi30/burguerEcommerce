@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import LocationButton from "../LocationButton";
 import useFont from "../../hooks/useFont";
 import helpersStyle from "../../constants/helpersStyle";
@@ -18,25 +18,27 @@ const CartResumen = () => {
     return (
         <>
             <LocationButton />
-            <Text style={styles.title}>{TITLE}</Text>
-            <View style={styles.listItems}>
-                <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
-                <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
-            </View>
-            <View style={styles.paymentInfo}>
-                <View style={styles.paymentInfoItem}>
-                    <Text style={styles.paymentInfoTxtBold} >{SUBTOTAL}</Text>
-                    <Text style={styles.paymentInfoTxtRegular}>$14.980</Text>
+            <ScrollView>
+                <Text style={styles.title}>{TITLE}</Text>
+                <View style={styles.listItems}>
+                    <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
+                    <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
                 </View>
-                <View style={styles.paymentInfoItem}>
-                    <Text style={styles.paymentInfoTxtBold} >{ENVIO}</Text>
-                    <Text style={styles.paymentInfoTxtRegular}>$990</Text>
+                <View style={styles.paymentInfo}>
+                    <View style={styles.paymentInfoItem}>
+                        <Text style={styles.paymentInfoTxtBold} >{SUBTOTAL}</Text>
+                        <Text style={styles.paymentInfoTxtRegular}>$14.980</Text>
+                    </View>
+                    <View style={styles.paymentInfoItem}>
+                        <Text style={styles.paymentInfoTxtBold} >{ENVIO}</Text>
+                        <Text style={styles.paymentInfoTxtRegular}>$990</Text>
+                    </View>
+                    <View style={styles.paymentInfoItem}>
+                        <Text style={styles.paymentInfoTxtBold}>{TOTAL}</Text>
+                        <Text style={styles.paymentInfoTxtBold}>$15.970</Text>
+                    </View>
                 </View>
-                <View style={styles.paymentInfoItem}>
-                    <Text style={styles.paymentInfoTxtBold}>{TOTAL}</Text>
-                    <Text style={styles.paymentInfoTxtBold}>$15.970</Text>
-                </View>
-            </View>
+            </ScrollView>
         </>
     );
 };

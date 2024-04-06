@@ -7,11 +7,8 @@ import useFont from '../../hooks/useFont';
 
 const { COLORS: { ORANGE }, FONT_SIZES: { SMALL } } = helpersStyle;
 
-const CheckboxSelect = ({ title, checkboxData }) => {
+const CheckboxSelect = ({ title, checkboxData, checkboxes, setCheckboxes, selectedBoxes, setSelectedBoxes }) => {
     const { fontsLoaded } = useFont();
-    const [checkboxes, setCheckboxes] = useState(checkboxData);
-    const [selectedItems, setSelectedItems] = useState([]);
-
     const toggleCheckbox = (id) => {
         setCheckboxes(checkboxes.map(checkbox => {
             if (checkbox.id === id) {
@@ -22,14 +19,8 @@ const CheckboxSelect = ({ title, checkboxData }) => {
     };
 
     useEffect(() => {
-        setSelectedItems(checkboxes.filter(checkbox => checkbox.isChecked === true));
+        setSelectedBoxes(checkboxes.filter(checkbox => checkbox.isChecked === true));
     }, [checkboxes])
-
-    useEffect(() => {
-        //AQUI IRA EL DISPATCH DE LOS ITEMS SELECCIONADOS
-    }, [selectedItems])
-
-    console.log('checkboxes', checkboxes)
 
     return (
         <View style={styles.container}>

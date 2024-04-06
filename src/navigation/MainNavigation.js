@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginStack from './LoginStack';
 import TabNavigation from './TabNavigation';
-// import useGetIdToken from '../hooks/useGetIdToken';
-import { useSelector } from 'react-redux';
+import useIdToken from '../hooks/useIdToken';
 
 const MainNavigation = () => {
-    const idToken = useSelector(state => state.idToken);
-    console.log('idToken', idToken);
+    const { token } = useIdToken();
     return (
         <NavigationContainer>
-            {idToken ? <TabNavigation /> : <LoginStack />}
+            {token ? <LoginStack /> : <TabNavigation />}
         </NavigationContainer>
     )
 };

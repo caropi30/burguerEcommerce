@@ -4,10 +4,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import RegularButton from '../RegularButton';
 import Input from '../Input';
 import useFont from '../../hooks/useFont';
-import labels from '../../constants/labels';
 import helpersStyle from '../../constants/helpersStyle';
 
-const { COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK }, FONT_SIZES: { LARGE } } = helpersStyle;
+const { COLORS: { DARK_GRAY, ORANGE }, FONT_SIZES: { LARGE } } = helpersStyle;
 
 const Step2 = ({ password, handlePassword, handleStep }) => {
     const { fontsLoaded } = useFont();
@@ -22,7 +21,7 @@ const Step2 = ({ password, handlePassword, handleStep }) => {
                 <Text style={styles.text}>{`\u002E`} Usa 1 mayúscula.</Text>
                 <Text style={styles.text}>{`\u002E`} No uses caracteres especiales (@-,#.*$).</Text>
             </View>
-            <RegularButton title="Crea tu contraseña" onPress={handleStep} />
+            <RegularButton title="Crea tu contraseña" onPress={handleStep} primary />
         </View>
     );
 };

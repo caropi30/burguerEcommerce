@@ -4,10 +4,10 @@ import HomeScreen from '../containers/HomeScreen';
 import CategoryScreen from '../containers/CategoryScreen';
 import ProductDetailScreen from '../containers/ProductDetailScreen';
 import CartScreen from '../containers/CartScreen';
-import Header from '../components/Header/Header';
 import AccountScreen from '../containers/AccountScreen';
 import OnboardingScreen from '../containers/OnboardingScreen';
 import LoginScreen from '../containers/LoginScreen';
+import LocationScreen from '../containers/LocationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +25,7 @@ const StackNavigation = () => (
         <Stack.Screen name="Cart" component={CartScreen} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Location" component={LocationScreen} />
     </Stack.Navigator>
 );
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import useFont from '../hooks/useFont';
 import labels from '../constants/labels';
@@ -12,8 +11,8 @@ import Header from '../components/Header/Header';
 import { useRegisterMutation } from '../services/authApi';
 import { useSetUserMutation } from '../services/burgersApi';
 import useHandleNavigation from '../hooks/useHandleNavigation';
-import { setIdToken } from '../actions/idTokenSlice';
-import RegularButton from '../components/RegularButton';
+import { setIdToken, setAddrees as setAddressIdToken } from '../actions/idTokenSlice';
+import useIdToken from '../hooks/useIdToken';
 
 const { COLORS: { DARK_GRAY, WHITE, ORANGE, BLACK }, FONT_SIZES: { SMALL_MEDIUM, LARGE } } = helpersStyle;
 
@@ -22,14 +21,39 @@ const OnboardingScreen = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
+    const [house, setHouse] = useState('');
     const [step, setStep] = useState(1)
     const [triggerRegister] = useRegisterMutation();
     const [triggerSetUser] = useSetUserMutation();
     const { fontsLoaded } = useFont();
-    const navigation = useNavigation();
     const dispatch = useDispatch();
+    const { name: nombre, token, email: correo, address: direccion } = useIdToken();
+    console.log('OnboardingScreen ----->',)
+    console.log('nombre', nombre)
+    console.log('token', token)
+    console.log('correo', correo)
+    console.log('direccion', direccion)
 
-    const { handleGoHome } = useHandleNavigation();
+    useEffect(() => {
+        console.log('OnboardingScreen USE EFFECT ----->',)
+        console.log('name', name)
+        console.log('email', email)
+        console.log('phone', phone)
+        console.log('password', password)
+        console.log('address', address)
+        console.log('house', house)
+
+    }, [name, email, phone, password, address, house]);
+
+    useEffect(() => {
+        console.log('nombre', nombre)
+        console.log('token', token)
+        console.log('correo', correo)
+        console.log('direccion', direccion)
+    }, [nombre, token, correo, direccion]);
+
+    const { handleGoHome, handleGoLogin } = useHandleNavigation();
 
     const handleGoBack = () => {
         if (step === 1) {
@@ -44,36 +68,18 @@ const OnboardingScreen = () => {
         };
     };
 
-    const handleRegisterInfo = async () => {
-        try {
-            const response = await triggerRegister({ email, password });
-            const idToken = response.data.idToken;
-            console.log('idToken', idToken);
-            dispatch(setIdToken(idToken));
-        } catch (error) {
-            console.log('error', error);
+    const renderSubtitle = () => {
+        if (step === 1) {
+            return 'Cuéntanos sobre ti';
+        }
+
+        if (step === 2) {
+            return 'Asegura tu cuenta';
+        }
+        if (step === 3) {
+            return '¿Dónde quieres recibir tus compras?';
         }
     };
-
-    const handleUserInfo = async (name, email, phone) => {
-        const { data } = await triggerSetUser({ name, email, phone, password });
-    };
-
-    const onSubmit = async () => {
-        await handleRegisterInfo();
-        await handleUserInfo(name, email, phone);
-        await setStep(3);
-        //await handleGoHome()
-    };
-
-
-    useEffect(() => {
-        console.log('name', name);
-        console.log('email', email);
-        console.log('phone', phone);
-        console.log('password', password);
-    }, [email, name, phone, password]);
-
 
     const renderContent = () => {
         if (step === 1) {
@@ -95,27 +101,67 @@ const OnboardingScreen = () => {
                 <Step2
                     password={password}
                     handlePassword={setPassword}
-                    //handleStep={() => setStep(3)}
-                    handleStep={onSubmit}
+                    handleStep={() => setStep(3)}
                 />
             );
         }
-        // return <Step3 />;
-        return <>
-            <Text>Bienvenido</Text>
-            <RegularButton title="Ir a Home" onPress={handleGoHome} />
-        </>
+        return (
+            <Step3
+                address={address.street}
+                setAddress={setAddress}
+                house={house}
+                setHouse={setHouse}
+                onPress={onSubmit}
+            />
+        );
     };
+
+    const handleRegisterInfo = async () => {
+        try {
+            const { data } = await triggerRegister({ email, password });
+            console.log('data handleRegisterInfo', data)
+            console.log('name handleRegisterInfo', name)
+            dispatch(setIdToken({
+                name: name,
+                email: data.email,
+                password: password,
+                token: data.idToken,
+                address: address,
+                phone: phone
+            }));
+            dispatch(setAddressIdToken({ street: address }));
+        } catch (error) {
+            console.log('error', error);
+        }
+    };
+
+    const handleUserInfo = async (name, email, phone) => {
+        console.log('name handleUserInfo', name)
+        const { data } = await triggerSetUser({
+            name,
+            email,
+            phone,
+            password,
+            token,
+            address,
+        });
+    };
+
+    const onSubmit = async () => {
+        await handleRegisterInfo();
+        await handleUserInfo(name, email, phone);
+        handleGoHome();
+    };
+
 
     return (
         <>
-            {/* {step !== 1 && <Header isCart={true} title='' goBack={step === 2 || step === 3 ? handleGoBack : handleGoHome} />} */}
-            <Header isCart={true} title='' goBack={step == 1 || step === 2 || step === 3 ? handleGoBack : handleGoHome} />
+            <Header isCart={true} isOnboarding={true} title='' goBack={step == 1 || step === 2 || step === 3 ? handleGoBack : handleGoHome} />
             <KeyboardAvoidingView style={styles.container}>
+                <Image source={require('../../assets/img/burgerToonLogo.png')} style={styles.logo} />
                 <Text style={styles.title}>¡Te damos la bienvenida!</Text>
-                <Text style={styles.subtitle}>Cuéntanos sobre ti</Text>
+                <Text style={styles.subtitle}>{renderSubtitle()}</Text>
                 {renderContent()}
-                {/* < Step3 /> */}
             </KeyboardAvoidingView>
         </>
 
@@ -124,9 +170,9 @@ const OnboardingScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
+        paddingTop: 32,
         backgroundColor: WHITE
     },
     title: {
@@ -139,6 +185,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Light',
         fontSize: SMALL_MEDIUM,
         marginBottom: 40,
+    },
+    logo: {
+        width: 100,
+        height: 119,
+        marginBottom: 16
     }
 });
 

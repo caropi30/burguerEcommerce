@@ -6,8 +6,7 @@ import helpersStyle from '../../../constants/helpersStyle';
 import labels from '../../../constants/labels';
 import useFont from "../../../hooks/useFont";
 
-
-const { COLORS: { ORANGE, BLACK, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW }, FONT_SIZES: { X_SMALL, SMALL, X_LARGE } } = helpersStyle;
+const { COLORS: { ORANGE, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW }, FONT_SIZES: { X_SMALL, SMALL, MEDIUM, X_LARGE } } = helpersStyle;
 
 const { COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA } } = labels;
 
@@ -23,22 +22,28 @@ const ComboCard = ({
     drinkTitle,
     chipsTitle,
     chipsType,
-    chipsSauce }) => {
+    chipsSauce,
+    onPress }) => {
     const { fontsLoaded } = useFont();
     return (
-        <View style={styles.container} key={id}>
-            <RadioButtonItem
-                key={id}
-                value={value}
-                label={
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.emoji}>{icon}</Text>
-                    </View>
-                }
-                radioBackground={ORANGE}
-                style={styles.radioBtn}
-            />
+        <TouchableOpacity style={styles.container} key={id} onPress={onPress}>
+            <View style={styles.radioContainer}>
+                <View>
+                    <FontAwesome name="circle" size={MEDIUM} color={ORANGE} />
+                </View>
+                <RadioButtonItem
+                    key={id}
+                    value={value}
+                    label={
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>{title}</Text>
+                            <Text style={styles.emoji}>{icon}</Text>
+                        </View>
+                    }
+                    radioBackground={ORANGE}
+                    style={styles.radioBtn}
+                />
+            </View>
             <View style={styles.contentContainer}>
                 <View style={styles.subtitleContainer}>
                     <FontAwesome name="circle" size={X_SMALL} color={ORANGE} />
@@ -65,7 +70,7 @@ const ComboCard = ({
                     <Text>{`\u002E Salsa`}:  {chipsSauce}</Text>
                 </View>
             </View>
-        </View>)
+        </TouchableOpacity>)
 };
 
 export default ComboCard;
@@ -78,6 +83,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: BORDER_YELLOW,
         borderRadius: 8,
+        marginBottom: 16,
 
     },
     titleContainer: {
@@ -123,4 +129,10 @@ const styles = StyleSheet.create({
     radioContainerStyle: {
         gap: 8
     },
+    radioContainer: {
+        position: 'relative',
+    },
+    radioDot: {
+        position: 'absolute',
+    }
 });
