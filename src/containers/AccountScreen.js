@@ -5,12 +5,25 @@ import useHandleNavigation from '../hooks/useHandleNavigation';
 import helpersStyle from '../constants/helpersStyle';
 import Header from '../components/Header/Header';
 import useFont from '../hooks/useFont';
+import useIdToken from '../hooks/useIdToken';
+import { useDispatch } from 'react-redux';
+import { setClearIdToken } from '../actions/idTokenSlice';
+import { deleteSession } from '../db';
 
 const { COLORS: { WHITE, GRAY, DARK_GRAY, BORDER_GRAY }, FONT_SIZES: { SMALL, MEDIUM } } = helpersStyle;
 
 const AccountScreen = () => {
     const { fontsLoaded } = useFont();
     const { handleGoLogin, handleGoLocation, handleGoHome } = useHandleNavigation();
+    const { name, email, phone, addressIdToken } = useIdToken();
+    const dispatch = useDispatch();
+
+    const onLogout = () => {
+        dispatch(setClearIdToken());
+        deleteSession();
+        handleGoLogin()
+    };
+
 
     return (
         <>
@@ -19,22 +32,26 @@ const AccountScreen = () => {
                 <View style={styles.subcontainer}>
                     <Text style={styles.title}>Información básica</Text>
                     <View style={styles.subcontainerFirtsItem}>
+                        <Text style={styles.subcontainerItemsTitle}>Nombre </Text>
+                        <Text style={styles.subcontainerItemsTxt}>{name} </Text>
+                    </View>
+                    <View style={styles.subcontainerItems}>
                         <Text style={styles.subcontainerItemsTitle}>Correo </Text>
-                        <Text style={styles.subcontainerItemsTxt}>Correo </Text>
+                        <Text style={styles.subcontainerItemsTxt}>{email} </Text>
                     </View>
                     <View style={styles.subcontainerItems}>
                         <Text style={styles.subcontainerItemsTitle}>Teléfono </Text>
-                        <Text style={styles.subcontainerItemsTxt}>Correo </Text>
+                        <Text style={styles.subcontainerItemsTxt}>{phone} </Text>
                     </View>
                     <View style={styles.subcontainerItems}>
                         <Text style={styles.subcontainerItemsTitle}>Dirección </Text>
-                        <Text style={styles.subcontainerItemsTxt}>Correo </Text>
+                        <Text style={styles.subcontainerItemsTxt}>{addressIdToken.street} </Text>
                     </View>
                 </View>
                 <View style={styles.btn}>
                     <RegularButton title="Agregar dirección" onPress={handleGoLocation} primary />
                 </View>
-                <RegularButton title="Cerrar sesión" onPress={handleGoLogin} secondary />
+                <RegularButton title="Cerrar sesión" onPress={onLogout} secondary />
             </View>
         </>
     );

@@ -11,9 +11,9 @@ const {
     FONT_SIZES: { SMALL, MEDIUM, LARGE },
 } = helpersStyle;
 
-const { CART_SCREEN: { RESUMEN_PEDIDO: { TITLE, SUBTOTAL, ENVIO, TOTAL } } } = labels;
+const { CART_SCREEN: { RESUMEN_PEDIDO: { TITLE, SUBTOTAL, ENVIO, TOTAL }, TAX } } = labels;
 
-const CartResumen = () => {
+const CartResumen = ({ data, subtotal }) => {
     const { fontsLoaded } = useFont();
     return (
         <>
@@ -21,21 +21,22 @@ const CartResumen = () => {
             <ScrollView>
                 <Text style={styles.title}>{TITLE}</Text>
                 <View style={styles.listItems}>
-                    <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
-                    <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
+                    {/* <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} />
+                    <CartItem icon="🍔" title="Hamburguesa" price="10.00" quantityController={false} /> */}
+                    {data?.map((item) => <CartItem icon={item.icon} title={item.title} radioValue={item.radioValue} price={item.price} quantityController={false} />)}
                 </View>
                 <View style={styles.paymentInfo}>
                     <View style={styles.paymentInfoItem}>
                         <Text style={styles.paymentInfoTxtBold} >{SUBTOTAL}</Text>
-                        <Text style={styles.paymentInfoTxtRegular}>$14.980</Text>
+                        <Text style={styles.paymentInfoTxtRegular}>${subtotal}</Text>
                     </View>
                     <View style={styles.paymentInfoItem}>
                         <Text style={styles.paymentInfoTxtBold} >{ENVIO}</Text>
-                        <Text style={styles.paymentInfoTxtRegular}>$990</Text>
+                        <Text style={styles.paymentInfoTxtRegular}>${TAX}</Text>
                     </View>
                     <View style={styles.paymentInfoItem}>
                         <Text style={styles.paymentInfoTxtBold}>{TOTAL}</Text>
-                        <Text style={styles.paymentInfoTxtBold}>$15.970</Text>
+                        <Text style={styles.paymentInfoTxtBold}>${subtotal + TAX}</Text>
                     </View>
                 </View>
             </ScrollView>

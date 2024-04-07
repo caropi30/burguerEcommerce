@@ -11,6 +11,7 @@ const { COLORS: { ORANGE, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW }, FONT_SIZES: { X_
 const { COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA } } = labels;
 
 const ComboCard = ({
+    dot,
     id,
     icon,
     title,
@@ -28,9 +29,7 @@ const ComboCard = ({
     return (
         <TouchableOpacity style={styles.container} key={id} onPress={onPress}>
             <View style={styles.radioContainer}>
-                <View>
-                    <FontAwesome name="circle" size={MEDIUM} color={ORANGE} />
-                </View>
+                {dot && <FontAwesome name="circle" size={20} color={ORANGE} style={styles.dot} />}
                 <RadioButtonItem
                     key={id}
                     value={value}
@@ -133,6 +132,11 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     radioDot: {
+        position: 'absolute',
+    },
+    dot: {
+        top: 11,
+        left: 3,
         position: 'absolute',
     }
 });

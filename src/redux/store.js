@@ -3,11 +3,11 @@ import subcategoriesSlice from '../actions/subcategoriesSlice';
 import productInfoSlice from '../actions/productInfoSlice';
 import idTokenSlice from '../actions/idTokenSlice';
 import cartSlice from '../actions/cartSlice';
-import productDataSlice from '../actions/productDataSlice';
 import userSlice from '../actions/userSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { burgersApi } from '../services/burgersApi';
 import { authApi } from '../services/authApi';
+import { usersApi } from '../services/userApi';
 
 
 const store = configureStore({
@@ -16,8 +16,6 @@ const store = configureStore({
         idToken: idTokenSlice,
         subcategories: subcategoriesSlice,
         cart: cartSlice,
-        productData: productDataSlice,
-        user: userSlice,
         [burgersApi.reducerPath]: burgersApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },

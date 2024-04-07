@@ -5,12 +5,14 @@ import { useDispatch } from 'react-redux';
 import ComboCard from "./components/ComboCard";
 import helpersStyle from "../../constants/helpersStyle";
 import { setItems } from "../../actions/cartSlice";
+import randomId from "../../utils/randomId";
 
 const { COLORS: { ORANGE, BG_LIGHT_GRAY, BORDER_YELLOW } } = helpersStyle;
 
 const ComboDetail = ({ id, icon, data, isFetching, setPrice }) => {
     const [current, setCurrent] = useState('');
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(1);
+    const [dot, setDot] = useState(false);
     const dispatch = useDispatch();
 
     return (
@@ -41,11 +43,12 @@ const ComboDetail = ({ id, icon, data, isFetching, setPrice }) => {
                                         chipsTitle={item.items.papas.name}
                                         chipsType={item.items.papas.tipo}
                                         chipsSauce={item.items.papas.salsa}
+                                        dot={dot}
                                         onPress={() => {
                                             {
                                                 dispatch(setItems({
                                                     title: item.title,
-                                                    id: item.id,
+                                                    id: randomId(),
                                                     icon: item.icon,
                                                     price: item.precio,
                                                     quantity: quantity,

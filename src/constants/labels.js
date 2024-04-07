@@ -46,6 +46,7 @@ const labels = {
         },
         BTN_CONTINUE: 'Continuar',
         BTN_PAGAR: 'Pagar',
+        TAX: 990,
     }
 };
 

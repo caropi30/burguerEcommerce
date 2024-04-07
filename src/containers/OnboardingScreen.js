@@ -11,8 +11,10 @@ import Header from '../components/Header/Header';
 import { useRegisterMutation } from '../services/authApi';
 import { useSetUserMutation } from '../services/burgersApi';
 import useHandleNavigation from '../hooks/useHandleNavigation';
-import { setIdToken, setAddrees as setAddressIdToken } from '../actions/idTokenSlice';
+import { setIdToken, setAddress as setAddressIdToken } from '../actions/idTokenSlice';
 import useIdToken from '../hooks/useIdToken';
+import { deleteSession, insertSession } from '../db';
+
 
 const { COLORS: { DARK_GRAY, WHITE, ORANGE, BLACK }, FONT_SIZES: { SMALL_MEDIUM, LARGE } } = helpersStyle;
 
@@ -119,8 +121,8 @@ const OnboardingScreen = () => {
     const handleRegisterInfo = async () => {
         try {
             const { data } = await triggerRegister({ email, password });
-            console.log('data handleRegisterInfo', data)
-            console.log('name handleRegisterInfo', name)
+            insertSession({ email: data.email, token: data.idToken });
+            deleteSession();
             dispatch(setIdToken({
                 name: name,
                 email: data.email,
@@ -145,6 +147,7 @@ const OnboardingScreen = () => {
             token,
             address,
         });
+        console.log('data handleUserInfo', data)
     };
 
     const onSubmit = async () => {

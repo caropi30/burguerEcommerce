@@ -33,9 +33,21 @@ export const idTokenSlice = createSlice({
             state.address.latitude = action.payload.latitude;
             state.address.longitude = action.payload.longitude;
         },
+        setClearIdToken: (state) => {
+            state.idToken.name = '';
+            state.idToken.email = '';
+            state.idToken.token = '';
+            state.idToken.localId = '';
+            state.idToken.address = '';
+        },
+        setClearAddress: (state) => {
+            state.address.street = '';
+            state.address.latitude = '';
+            state.address.longitude = '';
+        },
     },
 });
 
-export const { setIdToken, setAddress } = idTokenSlice.actions;
+export const { setIdToken, setAddress, setClearIdToken } = idTokenSlice.actions;
 
 export default idTokenSlice.reducer;

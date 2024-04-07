@@ -46,7 +46,15 @@ const TabNavigation = () => {
                     tabBarIcon: renderHomeIcon,
                     tabBarStyle: ((route) => {
                         const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-                        if (routeName === 'ProductDetail' || routeName === 'Cart' || routeName === 'Category' || routeName === 'Onboarding' || routeName === 'Login' || routeName === 'Location') {
+                        if (
+                            routeName === 'Splash' ||
+                            routeName === 'ProductDetail' ||
+                            routeName === 'Cart' ||
+                            routeName === 'Onboarding' ||
+                            routeName === 'Login' ||
+                            routeName === 'Location' ||
+                            routeName === 'Success' ||
+                            routeName === 'Category') {
                             return { display: "none" }
                         }
                         return null

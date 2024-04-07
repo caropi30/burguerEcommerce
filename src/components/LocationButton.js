@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor: BG_LIGHT_ORANGE,
+        width: '100%',
     },
     btnArrow: {
         justifyContent: 'center',

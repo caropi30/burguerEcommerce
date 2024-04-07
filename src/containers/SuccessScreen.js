@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import RegularButton from '../components/RegularButton';
+import LinkButton from '../components/LinkButton';
 import useHandleNavigation from '../hooks/useHandleNavigation';
 import helpersStyle from '../constants/helpersStyle';
+import useFont from '../hooks/useFont';
 
-const { COLORS: { WHITE, ORANGE } } = helpersStyle;
+const { COLORS: { WHITE, ORANGE }, FONT_SIZES: { MEDIUM, X_SMALL_LARGE } } = helpersStyle;
 
 const SuccessScreen = () => {
-    const { handleGoLogin, handleGoLocation } = useHandleNavigation();
+    const { fontsLoaded } = useFont();
+    const { handleGoHome, } = useHandleNavigation();
 
     return (
         <View style={styles.container}>
-            <Text>Cerrar sesión</Text>
-            <View style={styles.btn}>
-                <RegularButton title="Agregar dirección" onPress={handleGoLocation} primary />
-            </View>
-            <RegularButton title="Cerrar sesión" onPress={handleGoLogin} secondary />
+            <Text style={styles.icon}>🎉</Text>
+            <Text style={styles.title}>¡Listo!</Text>
+            <Text style={styles.subtitle}>Recibimos su pago exitosamente</Text>
+            <LinkButton title="Volver al inicio" onPress={handleGoHome} secondary />
         </View>
     );
 };
@@ -31,6 +32,23 @@ const styles = StyleSheet.create({
     btn: {
         marginVertical: 16,
         width: '100%',
+    },
+    icon: {
+        fontSize: 200,
+        textAlign: 'center',
+    },
+    title: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: X_SMALL_LARGE,
+        color: WHITE,
+        marginTop: 16,
+    },
+    subtitle: {
+        fontFamily: 'Montserrat-Medium',
+        color: WHITE,
+        fontSize: MEDIUM,
+        marginBottom: 32,
+        marginTop: 16,
     },
 });
 

@@ -22,6 +22,7 @@ const helpersStyle = {
         SMALL_MEDIUM: 18,
         MEDIUM: 20,
         LARGE: 24,
+        X_SMALL_LARGE: 32,
         X_LARGE: 36,
         MEDIUM_LARGE: 50,
         XX_LARGE: 66,

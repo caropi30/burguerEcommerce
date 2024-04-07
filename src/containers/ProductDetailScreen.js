@@ -9,6 +9,7 @@ import useHandleNavigation from '../hooks/useHandleNavigation';
 import labels from '../constants/labels';
 import { setItems } from '../actions/cartSlice';
 import RegularButton from '../components/RegularButton';
+import randomId from '../utils/randomId';
 
 const { COLORS: { WHITE } } = helpersStyle;
 
@@ -62,7 +63,7 @@ const ProductDetailScreen = () => {
     }, [productInfoDetail]);
 
     const handleCart = () => {
-        dispatch(setItems({ title, id, icon, price, quantity, radioValue, selectedBoxes, secondarySelectedBoxes }));
+        dispatch(setItems({ title, id: randomId(), icon, price, quantity, radioValue, selectedBoxes, secondarySelectedBoxes }));
         handleGoCart();
     };
 

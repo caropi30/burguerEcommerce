@@ -22,7 +22,9 @@ const useHandleNavigation = () => {
 
     const handleGoLogin = () => navigation.navigate('Login', { screen: 'LoginScreen' });
 
-    return { handleGoAccount, handleGoCategory, handleGoCart, handleGoHome, handleProductDetail, handleGoOnboarding, handleGoLocation, handleGoLogin };
+    const handleGoSuccess = () => navigation.navigate('Success', { screen: 'SuccessScreen' });
+
+    return { handleGoAccount, handleGoCategory, handleGoCart, handleGoHome, handleProductDetail, handleGoOnboarding, handleGoLocation, handleGoLogin, handleGoSuccess };
 };
 
 export default useHandleNavigation;

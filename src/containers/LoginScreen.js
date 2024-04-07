@@ -10,9 +10,11 @@ import helpersStyle from "../constants/helpersStyle";
 import labels from "../constants/labels";
 import useHandleNavigation from "../hooks/useHandleNavigation";
 import useFont from "../hooks/useFont";
-import { setIdToken } from "../actions/idTokenSlice";
+import { setIdToken, setClearIdToken } from "../actions/idTokenSlice";
 import useIdToken from "../hooks/useIdToken";
 import burgerToonLogo from '../../assets/img/burgerToonLogo.png';
+import { loginSchema } from "../utils/validations/formSchema";
+import insertSession, { deleteSession } from "../db";
 
 const { COLORS: { ORANGE, WHITE } } = helpersStyle;
 
@@ -25,15 +27,12 @@ const LoginScreen = () => {
     const { handleGoHome, handleGoOnboarding } = useHandleNavigation();
     const dispatch = useDispatch();
     const [triggerLogin] = useLoginMutation();
-    const { name: nombre, token, email: correo, address: direccion } = useIdToken();
-    console.log('LOGIn ----->',)
-    console.log('nombre', nombre)
-    console.log('token', token)
-    console.log('correo', correo)
-    console.log('direccion', direccion)
+    const { name: nombre, token, email: correo, address: direccion, localId: idLocal } = useIdToken();
 
     const handleCredentials = async () => {
         const { data } = await triggerLogin({ email, password });
+        deleteSession();
+        insertSession({ email: data.email, token: data.idToken, localId: data.localId });
         dispatch(setIdToken({ email: data.email, token: data.idToken, localId: data.localId }));
 
         if (token) {
@@ -44,24 +43,28 @@ const LoginScreen = () => {
 
     }
 
-    return (
-        <View style={styles.container}>
-            <Image source={require('../../assets/img/burgerToonLogo.png')} style={styles.logo} />
-            <Input label="¿Cuál es tu email?" onChangeText={(e) => setEmail(e)} value={email} onFocus placeholder='email' isSecure={false}>
-                <MaterialCommunityIcons name="email-fast-outline" size={25} color={ORANGE} />
-            </Input >
-            <Input label="Ingresar contraseña" onChangeText={(e) => setPassword(e)} value={password} placeholder="password" isSecure={securePass}>
-                {securePass ?
-                    <Ionicons name="eye-off-outline" size={25} color={ORANGE} onPress={() => setSecurePass(!securePass)} />
-                    : <Ionicons name="eye-outline" size={25} color={ORANGE} onPress={() => setSecurePass(!securePass)} />}
-            </Input>
-            {errorMsg && <Text style={styles.erroMsg}>{errorMsg}</Text>}
-            <RegularButton title="Ingresar" onPress={handleCredentials} primary />
-            <View style={styles.btnContainer}>
-                <RegularButton title="Regístrate aquí" onPress={handleGoOnboarding} secondary />
+    const renderContent = () => {
+        return (
+            <View style={styles.container}>
+                <Image source={require('../../assets/img/burgerToonLogo.png')} style={styles.logo} />
+                <Input label="¿Cuál es tu email?" onChangeText={(e) => setEmail(e)} value={email} onFocus placeholder='email' isSecure={false}>
+                    <MaterialCommunityIcons name="email-fast-outline" size={25} color={ORANGE} />
+                </Input >
+                <Input label="Ingresar contraseña" onChangeText={(e) => setPassword(e)} value={password} placeholder="password" isSecure={securePass}>
+                    {securePass ?
+                        <Ionicons name="eye-off-outline" size={25} color={ORANGE} onPress={() => setSecurePass(!securePass)} />
+                        : <Ionicons name="eye-outline" size={25} color={ORANGE} onPress={() => setSecurePass(!securePass)} />}
+                </Input>
+                {errorMsg && <Text style={styles.erroMsg}>{errorMsg}</Text>}
+                <RegularButton title="Ingresar" onPress={handleCredentials} primary />
+                <View style={styles.btnContainer}>
+                    <RegularButton title="Regístrate aquí" onPress={handleGoOnboarding} secondary />
+                </View>
             </View>
-        </View>
-    )
+        )
+    };
+
+    return fontsLoaded && renderContent();
 };
 
 export default LoginScreen;
@@ -73,6 +76,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 16,
         backgroundColor: WHITE
+    },
+    splash: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 16,
+        backgroundColor: ORANGE
     },
     btnContainer: {
         backgroundColor: WHITE,

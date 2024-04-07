@@ -11,6 +11,7 @@ import useGetSubcategories from '../hooks/useGetSubcategories';
 import { useGetComboProductsQuery } from '../services/burgersApi';
 import helpersStyle from '../constants/helpersStyle';
 import labels from '../constants/labels';
+import useGetCart from '../hooks/useGetCart';
 
 const { COLORS: { WHITE } } = helpersStyle;
 
@@ -18,7 +19,6 @@ const { PRODUCT_TYPE: { INDIVIDUALES } } = labels;
 
 const CategoryScreen = () => {
     const [price, setPrice] = useState(0)
-    console.log('price categoryScreen', price)
     const { handleGoHome, handleProductDetail, handleGoCart } = useHandleNavigation();
     const { subcategories } = useGetSubcategories();
     const { data: comboData, isError, isFetching: isFetchingComboData, isSuccess } = useGetComboProductsQuery();
@@ -26,6 +26,8 @@ const CategoryScreen = () => {
     const route = useRoute();
     const data = route?.params?.subcategories;
     const title = route?.params?.title;
+    const { cart } = useGetCart();
+    console.log('cart ---->', cart)
 
     const comboPaymentButton = `Añadir al carrito ${price !== 0 ? `$${price}` : ''}`;
 
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
     },
     paymentBtn: {
         marginTop: 0,
-        paddingHorizontal: 16,
         paddingBottom: 20,
         backgroundColor: WHITE,
     }
