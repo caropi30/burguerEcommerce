@@ -1,13 +1,12 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import OnboardingScreen from '../containers/OnboardingScreen';
-import LoginScreen from '../containers/LoginScreen';
-import SplashScreen from '../containers/SplashScreen';
-import TabNavigation from './TabNavigation';
-import StackNavigation from './StackNavigation';
+import React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import OnboardingScreen from '../containers/OnboardingScreen'
+import LoginScreen from '../containers/LoginScreen'
+import SplashScreen from '../containers/SplashScreen'
+import TabNavigation from './TabNavigation'
+import StackNavigation from './StackNavigation'
 
-
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const LoginStack = ({ setIdToken }) => (
     <Stack.Navigator
@@ -21,8 +20,7 @@ const LoginStack = ({ setIdToken }) => (
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
         <Stack.Screen name="HomeStack" component={TabNavigation} />
-
     </Stack.Navigator>
-);
+)
 
-export default LoginStack;
+export default LoginStack

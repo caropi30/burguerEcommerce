@@ -24,7 +24,6 @@ const labels = {
             TITLE: 'Arma tus papas',
             RADIO_TITLE: 'Elige tus papas',
             CHECKBOX_TITLE: 'Elige tus salsas (máx. 2)',
-
         },
         BTN_CART: 'Añadir al carrito',
     },
@@ -47,7 +46,7 @@ const labels = {
         BTN_CONTINUE: 'Continuar',
         BTN_PAGAR: 'Pagar',
         TAX: 990,
-    }
-};
+    },
+}
 
-export default labels;
+export default labels

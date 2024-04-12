@@ -6,31 +6,51 @@
 
 # BugerToon App
 
-E-commerce desarrollado en React NAtive, como tienda virtual de hamburguesas para venta al público.
+E-commerce desarrollado en React NAtive , como tienda virtual de hamburguesas para venta al público.
 Es un desarrollo de entrega para el Curso CoderHouse comisión 53280.
 
+
+## Demo
+
+> ![alt text](public/images/screens/navegacion.gif "Navegación")
+
+---
 
 ## Funcionalidad del proyecto
 Esta app muentra de una manera entretenida los diferentes productos que puede customizar el usuario, así como elegir productos ya armados.
 
-Para su desarrollo se implementó la librería React Native a través de Expo, manejando el inicio y registro de sesión, con el uso de las Apis de Firebase. 
+Para su desarrollo se implementó la lib React Native a través de Expo. También a manera de manejo de inicio y registro de sesión, se integró el uso de Apis respectivas a Firebase, 
+así como también se hizo uso de la Api Google Maps para inserción de dirección por parte del usuarrio.
 
-También se implementó la Api Google Maps para inserción de dirección por parte del usuario y se integró SQLite a través de Expo SQLite para el manejo de la persistencia de datos a través de BBDD.
+Este proyecto también integra SQLite a través de Expo SQLite para el manejo de BBDD.
 
 ---
 
+_Index_
+
+> ![picture alt](public/images/screens/pantalla-inicio.png "Pantalla inicio")
+
+---
+
+_Detalle de Producto_
+
+> ![picture alt](public/images/screens/pantalla-detalle.png "Pantalla detalle de producto")
+
+---
+
+---
 
 **Dependencias del proyecto:**
 
-> - **Expo:** https://expo.dev/
-> - **Expo Location:** https://docs.expo.dev/versions/latest/sdk/location/
+> - **Expo:**
+> - **Expo Location:** 
 > - **Expo Icons:** https://react-icons.github.io/react-icons/
-> - **Expo Font:** https://docs.expo.dev/develop/user-interface/fonts/#import-the-font
-> - **Expo SQLite:** https://docs.expo.dev/versions/latest/sdk/sqlite/
-> - **Google Fonts:** https://fonts.google.com/specimen/Montserrat
-> - **React Navigation:** https://reactnavigation.org/
-> - **Google Firebase:** https://firebase.google.com/?hl=es
- - **Google Maps Geolocation Api:** https://developers.google.com/maps?hl=es-419
+> - **Expo Font:**
+> - **Expo SQLite:**
+> - **Google Fonts:**
+> - **React Navigation:**
+> - **Firebase:**
+
 
 
 **Navegabilidad / Componentes**

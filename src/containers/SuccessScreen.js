@@ -1,25 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import LinkButton from '../components/LinkButton';
-import useHandleNavigation from '../hooks/useHandleNavigation';
-import helpersStyle from '../constants/helpersStyle';
-import useFont from '../hooks/useFont';
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import LinkButton from '../components/LinkButton'
+import useHandleNavigation from '../hooks/useHandleNavigation'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
 
-const { COLORS: { WHITE, ORANGE }, FONT_SIZES: { MEDIUM, X_SMALL_LARGE } } = helpersStyle;
+const {
+    COLORS: { WHITE, ORANGE },
+    FONT_SIZES: { MEDIUM, X_SMALL_LARGE },
+} = helpersStyle
 
 const SuccessScreen = () => {
-    const { fontsLoaded } = useFont();
-    const { handleGoHome, } = useHandleNavigation();
+    const { fontsLoaded } = useFont()
+    const { handleGoHome } = useHandleNavigation()
 
     return (
         <View style={styles.container}>
             <Text style={styles.icon}>🎉</Text>
             <Text style={styles.title}>¡Listo!</Text>
             <Text style={styles.subtitle}>Recibimos su pago exitosamente</Text>
-            <LinkButton title="Volver al inicio" onPress={handleGoHome} secondary />
+            <LinkButton
+                title="Volver al inicio"
+                onPress={handleGoHome}
+                secondary
+            />
         </View>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -50,6 +57,6 @@ const styles = StyleSheet.create({
         marginBottom: 32,
         marginTop: 16,
     },
-});
+})
 
-export default SuccessScreen;
+export default SuccessScreen

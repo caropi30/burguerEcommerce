@@ -1,65 +1,56 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import helpersStyle from '../../constants/helpersStyle';
-import useFont from '../../hooks/useFont';
-import CartButton from './components/CartButton';
-import LocationButton from './components/HeaderLocationButton';
-import {
-    Placeholder,
-    PlaceholderMedia,
-    PlaceholderLine,
-    Fade
-} from "rn-placeholder";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import helpersStyle from '../../constants/helpersStyle'
+import useFont from '../../hooks/useFont'
+import CartButton from './components/CartButton'
+import LocationButton from './components/HeaderLocationButton'
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY },
-} = helpersStyle;
+} = helpersStyle
 
 const Header = ({ isHome, isLoading, goBack, isCart, title, isOnboarding }) => {
-    const { fontsLoaded } = useFont();
+    const { fontsLoaded } = useFont()
 
-    const headerSkeleton = () => {
-        return (
-            <View style={styles.container}>
-                <View style={styles.skeletonSubcontainer}>
-                    <Placeholder
-                        Animation={Fade}
-                        Right={props => (
-                            <PlaceholderMedia
-                                isRound={true}
-                            />
-                        )}
-                    >
-                        <PlaceholderLine width={85} style={styles.skeletonHeight} />
-                    </Placeholder>
-                </View>
+    const headerSkeleton = () => (
+        <View style={styles.container}>
+            <View style={styles.skeletonSubcontainer}>
+                <Text>Cargando ...</Text>
             </View>
-        )
-    };
+        </View>
+    )
 
     const renderContent = () => (
         <View style={styles.container}>
-            <View style={!isOnboarding ? styles.subcontainer : styles.subcontainerOnboarding}>
-                <LocationButton isHome={isHome} goBack={goBack} isCart={isCart} title={title} />
-                {!isCart && < CartButton />}
+            <View
+                style={
+                    !isOnboarding
+                        ? styles.subcontainer
+                        : styles.subcontainerOnboarding
+                }
+            >
+                <LocationButton
+                    isHome={isHome}
+                    goBack={goBack}
+                    isCart={isCart}
+                    title={title}
+                />
+                {!isCart && <CartButton />}
             </View>
-        </View>);
-
-    return (
-        <>
-            {isLoading ? headerSkeleton() : renderContent()}
-        </>
+        </View>
     )
-};
 
-export default Header;
+    return <>{isLoading ? headerSkeleton() : renderContent()}</>
+}
+
+export default Header
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: WHITE,
         paddingHorizontal: 16,
         paddingTop: 16,
-
+        width: '100%',
     },
     subcontainer: {
         flexDirection: 'row',
@@ -123,7 +114,7 @@ const styles = StyleSheet.create({
     btnLocation: {
         flexDirection: 'row',
         gap: 8,
-        //alignItems: 'center',
+        // alignItems: 'center',
     },
     btnLocationTxt: {
         color: GRAY,
@@ -133,5 +124,5 @@ const styles = StyleSheet.create({
     btnLocationSecondary: {
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
-    }
-});
+    },
+})

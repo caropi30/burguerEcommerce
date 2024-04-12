@@ -1,13 +1,16 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import helpersStyle from "../constants/helpersStyle";
-import useFont from "../hooks/useFont";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
 
-const { COLORS: { ORANGE, WHITE, GRAY_MEDIUM }, FONT_SIZES: { SMALL } } = helpersStyle;
+const {
+    COLORS: { ORANGE, WHITE, GRAY_MEDIUM },
+    FONT_SIZES: { SMALL },
+} = helpersStyle
 
 const LinkButton = ({ onPress, title, buttonStyle, textStyle }) => {
-    const { fontsLoaded } = useFont();
+    const { fontsLoaded } = useFont()
     return (
         <View style={styles.container}>
             <Ionicons name="arrow-back-sharp" size={24} color={WHITE} />
@@ -15,10 +18,10 @@ const LinkButton = ({ onPress, title, buttonStyle, textStyle }) => {
                 <Text style={[textStyle, styles.btnTxt]}>{title}</Text>
             </TouchableOpacity>
         </View>
-    );
-};
+    )
+}
 
-export default LinkButton;
+export default LinkButton
 
 const styles = StyleSheet.create({
     container: {
@@ -34,4 +37,4 @@ const styles = StyleSheet.create({
         textDecorationColor: WHITE,
         textAlign: 'center',
     },
-});
+})

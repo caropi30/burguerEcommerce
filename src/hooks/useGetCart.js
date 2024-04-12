@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state
 
-const useGetCart = () => {
-    const cart = useSelector(mapStateToProps);
-    return cart;
-}
+const useGetCart = () => useSelector(mapStateToProps)
 
-export default useGetCart;
+export default useGetCart

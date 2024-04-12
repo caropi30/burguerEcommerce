@@ -1,19 +1,20 @@
-import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import Entypo from '@expo/vector-icons/Entypo';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import helpersStyle from "../constants/helpersStyle";
-import useHandleNavigation from "../hooks/useHandleNavigation";
-import useIdToken from "../hooks/useIdToken";
+import React from 'react'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import Entypo from '@expo/vector-icons/Entypo'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import helpersStyle from '../constants/helpersStyle'
+import useHandleNavigation from '../hooks/useHandleNavigation'
+import useIdToken from '../hooks/useIdToken'
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY, BG_LIGHT_ORANGE },
     FONT_SIZES: { SMALL, MEDIUM, LARGE, XX_LARGE },
-} = helpersStyle;
+} = helpersStyle
 
 const LocationButton = () => {
-    const { handleGoLocation } = useHandleNavigation();
-    const { addressIdToken: { street } } = useIdToken();
+    const { handleGoLocation } = useHandleNavigation()
+    const { address } = useIdToken()
+    console.log('LocationButton address ----->', address)
     // console.log('LocationButton addressIdToken ----->', addressIdToken)
     // console.log('LocationButton street ----->', street)
 
@@ -23,15 +24,24 @@ const LocationButton = () => {
             <View style={styles.btnLocationHome}>
                 <View>
                     <Text style={styles.btnLocationTxt}>Entregar en</Text>
-                    <Text style={styles.btnLocationSecondary}>{!street ? 'Agrega tu dirección' : street}</Text>
+                    <Text style={styles.btnLocationSecondary}>
+                        {!address.street
+                            ? 'Agrega tu dirección'
+                            : address.street}
+                    </Text>
                 </View>
-                <MaterialCommunityIcons name="pencil-outline" size={24} color={BLACK} style={styles.btnAdd} />
+                <MaterialCommunityIcons
+                    name="pencil-outline"
+                    size={24}
+                    color={BLACK}
+                    style={styles.btnAdd}
+                />
             </View>
         </TouchableOpacity>
-    );
-};
+    )
+}
 
-export default LocationButton;
+export default LocationButton
 
 const styles = StyleSheet.create({
     container: {
@@ -92,5 +102,5 @@ const styles = StyleSheet.create({
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
         fontSize: LARGE,
-    }
-});
+    },
+})

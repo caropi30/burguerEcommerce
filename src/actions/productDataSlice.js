@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     title: '',
@@ -8,14 +8,22 @@ const initialState = {
     selectedBoxes: [],
     secondarySelectedBoxes: [],
     price: '',
-};
+}
 
 export const productDataSlice = createSlice({
     name: 'productData',
     initialState,
     reducers: {
         setProductData: (state, action) => {
-            const { title, id, icon, radioValue, selectedBoxes, secondarySelectedBoxes, price } = action.payload;
+            const {
+                title,
+                id,
+                icon,
+                radioValue,
+                selectedBoxes,
+                secondarySelectedBoxes,
+                price,
+            } = action.payload
             return {
                 ...state,
                 title,
@@ -25,11 +33,11 @@ export const productDataSlice = createSlice({
                 selectedBoxes,
                 secondarySelectedBoxes,
                 price,
-            };
-        }
+            }
+        },
     },
-});
+})
 
-export const { setProductData } = productDataSlice.actions;
+export const { setProductData } = productDataSlice.actions
 
-export default productDataSlice.reducer;
+export default productDataSlice.reducer

@@ -33,6 +33,6 @@ const helpersStyle = {
         MEDIUM: '500',
         BOLD: '700',
     },
-};
+}
 
-export default helpersStyle;
+export default helpersStyle

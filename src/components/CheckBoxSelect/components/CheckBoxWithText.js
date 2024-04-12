@@ -1,22 +1,31 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Checkbox from 'expo-checkbox';
-import helpersStyle from '../../../constants/helpersStyle';
-import useFont from '../../../hooks/useFont';
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import Checkbox from 'expo-checkbox'
+import helpersStyle from '../../../constants/helpersStyle'
+import useFont from '../../../hooks/useFont'
 
-const { COLORS: { ORANGE, BLACK, GRAY }, FONT_SIZES: { SMALL } } = helpersStyle;
+const {
+    COLORS: { ORANGE, BLACK, GRAY },
+    FONT_SIZES: { SMALL },
+} = helpersStyle
 
 const CheckBoxWithText = ({ id, title, value, onValueChange, disabled }) => {
-    const { fontsLoaded } = useFont();
+    const { fontsLoaded } = useFont()
     return (
         <View style={styles.container}>
-            <Checkbox key={id} style={styles.checkbox} value={!disabled ? value : null} onValueChange={!disabled ? onValueChange : null} color={!disabled ? ORANGE : GRAY} />
+            <Checkbox
+                key={id}
+                style={styles.checkbox}
+                value={!disabled ? value : null}
+                onValueChange={!disabled ? onValueChange : null}
+                color={!disabled ? ORANGE : GRAY}
+            />
             <Text style={styles.checkTxt}>{title}</Text>
         </View>
-    );
-};
+    )
+}
 
-export default CheckBoxWithText;
+export default CheckBoxWithText
 
 const styles = StyleSheet.create({
     container: {
@@ -33,4 +42,4 @@ const styles = StyleSheet.create({
         color: GRAY,
         textTransform: 'capitalize',
     },
-});
+})

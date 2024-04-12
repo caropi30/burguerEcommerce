@@ -1,73 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-import ProductDetail from '../components/ProductDetail';
-import Header from '../components/Header/Header';
-import helpersStyle from '../constants/helpersStyle';
-import useFilterProductDetail from '../hooks/useFilterProductDetail';
-import useHandleNavigation from '../hooks/useHandleNavigation';
-import labels from '../constants/labels';
-import { setItems } from '../actions/cartSlice';
-import RegularButton from '../components/RegularButton';
-import randomId from '../utils/randomId';
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
+import ProductDetail from '../components/ProductDetail'
+import Header from '../components/Header/Header'
+import helpersStyle from '../constants/helpersStyle'
+import useFilterProductDetail from '../hooks/useFilterProductDetail'
+import useHandleNavigation from '../hooks/useHandleNavigation'
+import labels from '../constants/labels'
+import { setItems } from '../actions/cartSlice'
+import RegularButton from '../components/RegularButton'
+import randomId from '../utils/randomId'
 
-const { COLORS: { WHITE } } = helpersStyle;
+const {
+    COLORS: { WHITE },
+} = helpersStyle
 
-const { CATEGORIES, PDP: { HAMBURGUESA, BEBIDAS, PAPAS }, PRODUCT_TYPE: { INDIVIDUALES } } = labels;
+const {
+    CATEGORIES,
+    PDP: { HAMBURGUESA, BEBIDAS, PAPAS },
+    PRODUCT_TYPE: { INDIVIDUALES },
+} = labels
 
 const ProductDetailScreen = () => {
-    const [title, setTitle] = useState('');
-    const [icon, setIcon] = useState('');
-    const [id, setId] = useState('');
-    const [price, setPrice] = useState('');
+    const [title, setTitle] = useState('')
+    const [icon, setIcon] = useState('')
+    const [id, setId] = useState('')
+    const [price, setPrice] = useState('')
     const [quantity, setQuantity] = useState(1)
-    const [checkboxes, setCheckboxes] = useState([]);
-    const [selectedBoxes, setSelectedBoxes] = useState([]);
-    const [secondarySelectedBoxes, setSecondarySelectedBoxes] = useState([]);
-    const [secondaryCheckboxes, setSecondaryCheckboxes] = useState([]);
-    const [radioValue, setRadioValue] = useState('');
-    const { filteredProductDetail, isFetching } = useFilterProductDetail();
-    const { handleGoCategory, handleGoCart } = useHandleNavigation();
+    const [checkboxes, setCheckboxes] = useState([])
+    const [selectedBoxes, setSelectedBoxes] = useState([])
+    const [secondarySelectedBoxes, setSecondarySelectedBoxes] = useState([])
+    const [secondaryCheckboxes, setSecondaryCheckboxes] = useState([])
+    const [radioValue, setRadioValue] = useState('')
+    const { filteredProductDetail, isFetching } = useFilterProductDetail()
+    const { handleGoCategory, handleGoCart } = useHandleNavigation()
 
-    const productInfoDetail = filteredProductDetail[0];
-    const productInfoDetailHamburguesa = productInfoDetail?.id === CATEGORIES.HAMBURGUESA;
-    const productInfoDetailBebidas = productInfoDetail?.id === CATEGORIES.BEBIDAS;
-    const productInfoDetailPapas = productInfoDetail?.id === CATEGORIES.PAPAS;
-    const dispatch = useDispatch();
+    const productInfoDetail = filteredProductDetail[0]
+    const productInfoDetailHamburguesa =
+        productInfoDetail?.id === CATEGORIES.HAMBURGUESA
+    const productInfoDetailBebidas =
+        productInfoDetail?.id === CATEGORIES.BEBIDAS
+    const productInfoDetailPapas = productInfoDetail?.id === CATEGORIES.PAPAS
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (productInfoDetailHamburguesa) {
-            setTitle(productInfoDetail?.title);
-            setIcon(productInfoDetail?.icon);
-            setId(productInfoDetail?.id);
-            setPrice(productInfoDetail?.precio);
-            setCheckboxes(productInfoDetail?.items?.salsas || []);
-            setSecondaryCheckboxes(productInfoDetail?.items?.vegetales || []);
+            setTitle(productInfoDetail?.title)
+            setIcon(productInfoDetail?.icon)
+            setId(productInfoDetail?.id)
+            setPrice(productInfoDetail?.precio)
+            setCheckboxes(productInfoDetail?.items?.salsas || [])
+            setSecondaryCheckboxes(productInfoDetail?.items?.vegetales || [])
             setQuantity(quantity)
         }
         if (productInfoDetailBebidas) {
-            setTitle(productInfoDetail?.title);
-            setIcon(productInfoDetail?.icon);
-            setId(productInfoDetail?.id);
-            setPrice(productInfoDetail?.precio);
+            setTitle(productInfoDetail?.title)
+            setIcon(productInfoDetail?.icon)
+            setId(productInfoDetail?.id)
+            setPrice(productInfoDetail?.precio)
             setQuantity(quantity)
-
         } else if (productInfoDetailPapas) {
-            setPrice(productInfoDetail?.precio);
-            setTitle(productInfoDetail?.title);
-            setIcon(productInfoDetail?.icon);
-            setId(productInfoDetail?.id);
-            setCheckboxes(productInfoDetail?.items?.salsas || []);
+            setPrice(productInfoDetail?.precio)
+            setTitle(productInfoDetail?.title)
+            setIcon(productInfoDetail?.icon)
+            setId(productInfoDetail?.id)
+            setCheckboxes(productInfoDetail?.items?.salsas || [])
             setQuantity(quantity)
         }
-    }, [productInfoDetail]);
+    }, [productInfoDetail])
 
     const handleCart = () => {
-        dispatch(setItems({ title, id: randomId(), icon, price, quantity, radioValue, selectedBoxes, secondarySelectedBoxes }));
-        handleGoCart();
-    };
+        dispatch(
+            setItems({
+                title,
+                id: randomId(),
+                icon,
+                price,
+                quantity,
+                radioValue,
+                selectedBoxes,
+                secondarySelectedBoxes,
+            })
+        )
+        handleGoCart()
+    }
 
-    const handleGoBack = () => handleGoCategory({ title: INDIVIDUALES });
+    const handleGoBack = () => handleGoCategory({ title: INDIVIDUALES })
 
     const renderTypeInfo = () => {
         if (productInfoDetailHamburguesa) {
@@ -86,7 +104,9 @@ const ProductDetailScreen = () => {
                     setCheckboxes={setCheckboxes}
                     selectedBoxes={selectedBoxes}
                     setSelectedBoxes={setSelectedBoxes}
-                    secondaryCheckBoxTitle={HAMBURGUESA.SECONDARY_CHECKBOX_TITLE}
+                    secondaryCheckBoxTitle={
+                        HAMBURGUESA.SECONDARY_CHECKBOX_TITLE
+                    }
                     secondaryCheckBox={productInfoDetail?.items?.vegetales}
                     secondaryCheckboxes={secondaryCheckboxes}
                     setSecondaryCheckboxes={setSecondaryCheckboxes}
@@ -94,7 +114,7 @@ const ProductDetailScreen = () => {
                     setSecondarySelectedBoxes={setSecondarySelectedBoxes}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         if (productInfoDetailBebidas) {
@@ -109,7 +129,7 @@ const ProductDetailScreen = () => {
                     setRadioValue={setRadioValue}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         if (productInfoDetailPapas) {
@@ -129,31 +149,39 @@ const ProductDetailScreen = () => {
                     setSelectedBoxes={setSelectedBoxes}
                     price={productInfoDetail?.precio}
                 />
-            );
+            )
         }
 
         return <Text>No hay información</Text>
+    }
 
-    };
-
-    const renderSkeleton = () => {
-        return <Text>Cargando...</Text >
-    };
+    const renderSkeleton = () => <Text>Cargando...</Text>
 
     return (
         <>
-            <Header isHome={false} goBack={handleGoBack} isLoading={isFetching} />
-            {!isFetching ?
+            <Header
+                isHome={false}
+                goBack={handleGoBack}
+                isLoading={isFetching}
+            />
+            {!isFetching ? (
                 <>
                     <View style={styles.container}>{renderTypeInfo()}</View>
                     <View style={styles.paymentBtn}>
-                        <RegularButton title="Agregar al carrito" price={price} onPress={handleCart} primary />
+                        <RegularButton
+                            title="Agregar al carrito"
+                            price={price}
+                            onPress={handleCart}
+                            primary
+                        />
                     </View>
                 </>
-                : renderSkeleton()}
+            ) : (
+                renderSkeleton()
+            )}
         </>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -166,7 +194,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingBottom: 20,
         backgroundColor: WHITE,
-    }
-});
+    },
+})
 
-export default ProductDetailScreen;
+export default ProductDetailScreen

@@ -1,20 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state
 
 const useIdToken = () => {
-    const idToken = useSelector(mapStateToProps);
-    const tokenId = idToken?.idToken?.idToken;
-    const addressIdToken = idToken?.idToken?.address;
-    const name = tokenId?.name;
-    const email = tokenId?.email;
-    const token = tokenId?.token;
-    const localId = tokenId?.localId;
-    const address = tokenId?.address;
-    const phone = tokenId?.phone;
+    const idToken = useSelector(mapStateToProps)
+    // console.log('useIdToken idToken HOOK', idToken)
+    const token = idToken?.idToken?.idToken
+    console.log('useIdToken token HOOK', token)
+    const address = idToken?.idToken?.address
+    console.log('useIdToken address HOOK', address)
+    const userData = idToken?.idToken?.userData
+    console.log('useIdToken userData HOOK', userData)
 
-    return { name, email, token, localId, address, phone, addressIdToken };
-
+    return {
+        token,
+        address,
+        userData,
+    }
 }
 
-export default useIdToken;
+export default useIdToken

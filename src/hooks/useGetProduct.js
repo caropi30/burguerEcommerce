@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state
 
-const useGetProduct = () => {
-    const product = useSelector(mapStateToProps);
-    return product;
-}
+const useGetProduct = () => useSelector(mapStateToProps)
 
-export default useGetProduct;
+export default useGetProduct

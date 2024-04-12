@@ -1,34 +1,47 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import helpersStyle from "../constants/helpersStyle";
-import useFont from "../hooks/useFont";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
 
-const { COLORS: { ORANGE, WHITE, GRAY_MEDIUM } } = helpersStyle;
+const {
+    COLORS: { ORANGE, WHITE, GRAY_MEDIUM },
+} = helpersStyle
 
-const RegularButton = ({ onPress, title, disabled, price, primary, secondary }) => {
-    const { fontsLoaded } = useFont();
+const RegularButton = ({
+    onPress,
+    title,
+    disabled,
+    price,
+    primary,
+    secondary,
+}) => {
+    const { fontsLoaded } = useFont()
 
     const colorButtonStyle = (primary, secondary, disabled) => {
-        if (primary) return [styles.btnPrimary];
-        if (secondary) return styles.btnSecondary;
-        if (disabled) return styles.btnDisabled;
-    };
+        if (primary) return [styles.btnPrimary]
+        if (secondary) return styles.btnSecondary
+        if (disabled) return styles.btnDisabled
+    }
 
     const colorButtonTextStyle = (primary, secondary, disabled) => {
-        if (primary) return styles.btnPrimaryTxt;
-        if (secondary) return styles.btnSecondaryTxt;
-        if (disabled) return styles.btnDisabledTxt;
-
-    };
+        if (primary) return styles.btnPrimaryTxt
+        if (secondary) return styles.btnSecondaryTxt
+        if (disabled) return styles.btnDisabledTxt
+    }
 
     return (
-        <TouchableOpacity style={colorButtonStyle(primary, secondary, disabled)} onPress={onPress} >
-            <Text style={colorButtonTextStyle(primary, secondary, disabled)}>{title} {price && `$${price}`}</Text>
-        </TouchableOpacity >
-    );
-};
+        <TouchableOpacity
+            style={colorButtonStyle(primary, secondary, disabled)}
+            onPress={onPress}
+        >
+            <Text style={colorButtonTextStyle(primary, secondary, disabled)}>
+                {title} {price && `$${price}`}
+            </Text>
+        </TouchableOpacity>
+    )
+}
 
-export default RegularButton;
+export default RegularButton
 
 const styles = StyleSheet.create({
     btnPrimary: {
@@ -68,4 +81,4 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         marginTop: 0,
     },
-});
+})

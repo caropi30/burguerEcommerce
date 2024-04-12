@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import services from '../constants/services';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import services from '../constants/services'
 
 export const usersApi = createApi({
     reducerPath: 'burgersApi',
@@ -13,6 +13,6 @@ export const usersApi = createApi({
             }),
         }),
     }),
-});
+})
 
-export const { useSetUserMutation } = usersApi;
+export const { useSetUserMutation } = usersApi

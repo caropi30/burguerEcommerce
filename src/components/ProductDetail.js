@@ -1,17 +1,22 @@
-import React from 'react';
-import { Text, StyleSheet, TextInput, ScrollView } from 'react-native';
-import Card from './Card';
-import RadioSelect from './RadioSelect';
-import CheckboxSelect from './CheckBoxSelect/CheckboxSelect';
-import RegularButton from './RegularButton';
-import helpersStyle from '../constants/helpersStyle';
-import labels from '../constants/labels';
-import useFont from '../hooks/useFont';
-import useHandleNavigation from '../hooks/useHandleNavigation';
+import React from 'react'
+import { Text, StyleSheet, TextInput, ScrollView } from 'react-native'
+import Card from './Card'
+import RadioSelect from './RadioSelect'
+import CheckboxSelect from './CheckBoxSelect/CheckboxSelect'
+import RegularButton from './RegularButton'
+import helpersStyle from '../constants/helpersStyle'
+import labels from '../constants/labels'
+import useFont from '../hooks/useFont'
+import useHandleNavigation from '../hooks/useHandleNavigation'
 
-const { COLORS: { BLACK }, FONT_SIZES: { MEDIUM } } = helpersStyle;
+const {
+    COLORS: { BLACK },
+    FONT_SIZES: { MEDIUM },
+} = helpersStyle
 
-const { PDP: { COMMENT, BTN_CART } } = labels;
+const {
+    PDP: { COMMENT, BTN_CART },
+} = labels
 
 const ProductDetail = ({
     cardTitle,
@@ -33,33 +38,43 @@ const ProductDetail = ({
     setSecondaryCheckboxes,
     secondarySelectedBoxes,
     setSecondarySelectedBoxes,
-    price }) => {
-    const { fontsLoaded } = useFont();
-    const { handleGoCart } = useHandleNavigation();
+    price,
+}) => {
+    const { fontsLoaded } = useFont()
+    const { handleGoCart } = useHandleNavigation()
 
     return (
-        <ScrollView indicatorStyle='white'>
+        <ScrollView indicatorStyle="white">
             <Card title={cardTitle} icon={icon} />
             <Text style={styles.title}>{title}</Text>
-            {radioData && <RadioSelect
-                radioTitle={radioTitle}
-                radioData={radioData}
-                radioValue={radioValue}
-                setRadioValue={setRadioValue} />}
-            {checkboxes && <CheckboxSelect
-                title={checkboxTitle}
-                checkboxData={checkboxData}
-                checkboxes={checkboxes}
-                setCheckboxes={setCheckboxes}
-                selectedBoxes={selectedBoxes}
-                setSelectedBoxes={setSelectedBoxes} />}
-            {secondaryCheckboxes && <CheckboxSelect
-                title={secondaryCheckBoxTitle}
-                checkboxData={secondaryCheckBox}
-                checkboxes={secondaryCheckboxes}
-                setCheckboxes={setSecondaryCheckboxes}
-                selectedBoxes={secondarySelectedBoxes}
-                setSelectedBoxes={setSecondarySelectedBoxes} />}
+            {radioData && (
+                <RadioSelect
+                    radioTitle={radioTitle}
+                    radioData={radioData}
+                    radioValue={radioValue}
+                    setRadioValue={setRadioValue}
+                />
+            )}
+            {checkboxes && (
+                <CheckboxSelect
+                    title={checkboxTitle}
+                    checkboxData={checkboxData}
+                    checkboxes={checkboxes}
+                    setCheckboxes={setCheckboxes}
+                    selectedBoxes={selectedBoxes}
+                    setSelectedBoxes={setSelectedBoxes}
+                />
+            )}
+            {secondaryCheckboxes && (
+                <CheckboxSelect
+                    title={secondaryCheckBoxTitle}
+                    checkboxData={secondaryCheckBox}
+                    checkboxes={secondaryCheckboxes}
+                    setCheckboxes={setSecondaryCheckboxes}
+                    selectedBoxes={secondarySelectedBoxes}
+                    setSelectedBoxes={setSecondarySelectedBoxes}
+                />
+            )}
             <Text style={styles.textComment}>{COMMENT}</Text>
             <TextInput
                 placeholder="Añadir comentario"
@@ -71,11 +86,10 @@ const ProductDetail = ({
                 multiline
                 numberOfLines={3}
                 style={styles.textArea}
-
             />
         </ScrollView>
     )
-};
+}
 
 const styles = StyleSheet.create({
     title: {
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 16,
         fontFamily: 'Montserrat-SemiBold',
-        //textTransform: 'capitalize',
+        // textTransform: 'capitalize',
     },
     textArea: {
         borderWidth: 1,
@@ -101,7 +115,7 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         marginTop: 4,
-    }
-});
+    },
+})
 
-export default ProductDetail;
+export default ProductDetail

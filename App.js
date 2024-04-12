@@ -6,9 +6,6 @@ import TabNavigation from './src/navigation/TabNavigation';
 import StackNavigation from './src/navigation/StackNavigation';
 import MainNavigation from './src/navigation/MainNavigation';
 import store from './src/redux/store';
-import { init } from './src/db';
-
-init();
 
 const App = () => (
   <Provider store={store}>

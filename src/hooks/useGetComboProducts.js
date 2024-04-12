@@ -1,10 +1,10 @@
-import React from "react";
-import useGetComboProductsQuery from "../services/burgersApi";
+import React from 'react'
+import useGetComboProductsQuery from '../services/burgersApi'
 
 const useGetComboProducts = () => {
-    const { data, isError, isFetching, isSuccess } = useGetComboProductsQuery();
+    const { data, isError, isFetching, isSuccess } = useGetComboProductsQuery()
 
-    const comboProdutcs = isFetching ? [] : data;
+    const comboProdutcs = isFetching ? [] : data
 
     return {
         comboProdutcs,
@@ -12,6 +12,6 @@ const useGetComboProducts = () => {
         isFetching,
         isSuccess,
     }
-};
+}
 
-export default useGetComboProducts;
+export default useGetComboProducts

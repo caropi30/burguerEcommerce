@@ -1,28 +1,35 @@
-import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import helpersStyle from '../constants/helpersStyle';
-import useFont from '../hooks/useFont';
-import { setProductInfo } from '../actions/productInfoSlice';
+import React from 'react'
+import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
+import helpersStyle from '../constants/helpersStyle'
+import useFont from '../hooks/useFont'
+import { setProductInfo } from '../actions/productInfoSlice'
 
-const { COLORS: { BLACK, BG_LIGHT_ORANGE, BORDER_YELLOW }, FONT_SIZES: { SMALL, XX_LARGE } } = helpersStyle;
+const {
+    COLORS: { BLACK, BG_LIGHT_ORANGE, BORDER_YELLOW },
+    FONT_SIZES: { SMALL, XX_LARGE },
+} = helpersStyle
 
 const Card = ({ id, onPress, icon, title }) => {
-    const { fontsLoaded } = useFont();
-    const dispatch = useDispatch();
+    const { fontsLoaded } = useFont()
+    const dispatch = useDispatch()
 
     const handleData = async (param) => {
-        await dispatch(setProductInfo(param));
-        await onPress();
-    };
+        await dispatch(setProductInfo(param))
+        await onPress()
+    }
 
     return (
-        <TouchableOpacity style={styles.container} key={id} onPress={() => handleData({ title, id, icon })}>
+        <TouchableOpacity
+            style={styles.container}
+            key={id}
+            onPress={() => handleData({ title, id, icon })}
+        >
             <Text style={styles.emoji}>{icon}</Text>
             <Text style={styles.txt}>{title}</Text>
         </TouchableOpacity>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -47,8 +54,8 @@ const styles = StyleSheet.create({
     },
     emoji: {
         fontSize: XX_LARGE,
-        elevation: 10
+        elevation: 10,
     },
-});
+})
 
-export default Card;
+export default Card

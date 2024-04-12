@@ -1,14 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { RadioButtonItem } from 'expo-radio-button';
-import helpersStyle from '../../../constants/helpersStyle';
-import labels from '../../../constants/labels';
-import useFont from "../../../hooks/useFont";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { RadioButtonItem } from 'expo-radio-button'
+import helpersStyle from '../../../constants/helpersStyle'
+import labels from '../../../constants/labels'
+import useFont from '../../../hooks/useFont'
 
-const { COLORS: { ORANGE, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW }, FONT_SIZES: { X_SMALL, SMALL, MEDIUM, X_LARGE } } = helpersStyle;
+const {
+    COLORS: { ORANGE, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW },
+    FONT_SIZES: { X_SMALL, SMALL, MEDIUM, X_LARGE },
+} = helpersStyle
 
-const { COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA } } = labels;
+const {
+    COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA },
+} = labels
 
 const ComboCard = ({
     dot,
@@ -24,12 +29,20 @@ const ComboCard = ({
     chipsTitle,
     chipsType,
     chipsSauce,
-    onPress }) => {
-    const { fontsLoaded } = useFont();
+    onPress,
+}) => {
+    const { fontsLoaded } = useFont()
     return (
         <TouchableOpacity style={styles.container} key={id} onPress={onPress}>
             <View style={styles.radioContainer}>
-                {dot && <FontAwesome name="circle" size={20} color={ORANGE} style={styles.dot} />}
+                {dot && (
+                    <FontAwesome
+                        name="circle"
+                        size={20}
+                        color={ORANGE}
+                        style={styles.dot}
+                    />
+                )}
                 <RadioButtonItem
                     key={id}
                     value={value}
@@ -49,8 +62,12 @@ const ComboCard = ({
                     <Text style={styles.title}>{burgerTitle}</Text>
                 </View>
                 <View styles={styles.subcontentContainer}>
-                    <Text>{`\u002E ${PROTEINA}`}: {burgerProtein}</Text>
-                    <Text>{`\u002E ${VEGETALES}`}: {burgerVegatables.join(', ')}</Text>
+                    <Text>
+                        {`\u002E ${PROTEINA}`}: {burgerProtein}
+                    </Text>
+                    <Text>
+                        {`\u002E ${VEGETALES}`}: {burgerVegatables.join(', ')}
+                    </Text>
                     {/* <Text>{`\u002E ${SALSA}`}: {salsas.join(', ')}</Text> */}
                 </View>
                 <View style={styles.subtitleContainer}>
@@ -58,21 +75,28 @@ const ComboCard = ({
                     <Text style={styles.title}>{drinkTitle}</Text>
                 </View>
                 <View>
-                    <Text>{`\u002E`} {drinkFlavors}</Text>
+                    <Text>
+                        {`\u002E`} {drinkFlavors}
+                    </Text>
                 </View>
                 <View style={styles.subtitleContainer}>
                     <FontAwesome name="circle" size={X_SMALL} color={ORANGE} />
                     <Text style={styles.title}>{chipsTitle}</Text>
                 </View>
                 <View>
-                    <Text>{`\u002E Tipo`}:  {chipsType}</Text>
-                    <Text>{`\u002E Salsa`}:  {chipsSauce}</Text>
+                    <Text>
+                        {`\u002E Tipo`}: {chipsType}
+                    </Text>
+                    <Text>
+                        {`\u002E Salsa`}: {chipsSauce}
+                    </Text>
                 </View>
             </View>
-        </TouchableOpacity>)
-};
+        </TouchableOpacity>
+    )
+}
 
-export default ComboCard;
+export default ComboCard
 
 const styles = StyleSheet.create({
     container: {
@@ -83,14 +107,13 @@ const styles = StyleSheet.create({
         borderColor: BORDER_YELLOW,
         borderRadius: 8,
         marginBottom: 16,
-
     },
     titleContainer: {
         flexDirection: 'row',
         paddingLeft: 8,
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '95%'
+        width: '95%',
     },
     title: {
         fontFamily: 'Montserrat-SemiBold',
@@ -111,7 +134,7 @@ const styles = StyleSheet.create({
     },
     emoji: {
         fontSize: X_LARGE,
-        elevation: 10
+        elevation: 10,
     },
     radioLabel: {
         fontFamily: 'Montserrat-Medium',
@@ -126,7 +149,7 @@ const styles = StyleSheet.create({
         height: 24,
     },
     radioContainerStyle: {
-        gap: 8
+        gap: 8,
     },
     radioContainer: {
         position: 'relative',
@@ -138,5 +161,5 @@ const styles = StyleSheet.create({
         top: 11,
         left: 3,
         position: 'absolute',
-    }
-});
+    },
+})

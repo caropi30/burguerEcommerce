@@ -1,35 +1,45 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import Card from '../components/Card';
-import RegularButton from '../components/RegularButton';
-import ComboDetail from '../components/ComboDetail/ComboDetail';
-import { useRoute } from '@react-navigation/native';
-import useFont from '../hooks/useFont';
-import Header from '../components/Header/Header';
-import useHandleNavigation from '../hooks/useHandleNavigation';
-import useGetSubcategories from '../hooks/useGetSubcategories';
-import { useGetComboProductsQuery } from '../services/burgersApi';
-import helpersStyle from '../constants/helpersStyle';
-import labels from '../constants/labels';
-import useGetCart from '../hooks/useGetCart';
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { useRoute } from '@react-navigation/native'
+import Card from '../components/Card'
+import RegularButton from '../components/RegularButton'
+import ComboDetail from '../components/ComboDetail/ComboDetail'
+import useFont from '../hooks/useFont'
+import Header from '../components/Header/Header'
+import useHandleNavigation from '../hooks/useHandleNavigation'
+import useGetSubcategories from '../hooks/useGetSubcategories'
+import { useGetComboProductsQuery } from '../services/burgersApi'
+import helpersStyle from '../constants/helpersStyle'
+import labels from '../constants/labels'
+import useGetCart from '../hooks/useGetCart'
 
-const { COLORS: { WHITE } } = helpersStyle;
+const {
+    COLORS: { WHITE },
+} = helpersStyle
 
-const { PRODUCT_TYPE: { INDIVIDUALES } } = labels;
+const {
+    PRODUCT_TYPE: { INDIVIDUALES },
+} = labels
 
 const CategoryScreen = () => {
     const [price, setPrice] = useState(0)
-    const { handleGoHome, handleProductDetail, handleGoCart } = useHandleNavigation();
-    const { subcategories } = useGetSubcategories();
-    const { data: comboData, isError, isFetching: isFetchingComboData, isSuccess } = useGetComboProductsQuery();
-    const { fontsLoaded } = useFont();
-    const route = useRoute();
-    const data = route?.params?.subcategories;
-    const title = route?.params?.title;
-    const { cart } = useGetCart();
+    const { handleGoHome, handleProductDetail, handleGoCart } =
+        useHandleNavigation()
+    const { subcategories } = useGetSubcategories()
+    const {
+        data: comboData,
+        isError,
+        isFetching: isFetchingComboData,
+        isSuccess,
+    } = useGetComboProductsQuery()
+    const { fontsLoaded } = useFont()
+    const route = useRoute()
+    const data = route?.params?.subcategories
+    const title = route?.params?.title
+    const { cart } = useGetCart()
     console.log('cart ---->', cart)
 
-    const comboPaymentButton = `Añadir al carrito ${price !== 0 ? `$${price}` : ''}`;
+    const comboPaymentButton = `Añadir al carrito ${price !== 0 ? `$${price}` : ''}`
 
     return (
         <>
@@ -40,20 +50,36 @@ const CategoryScreen = () => {
                     <FlatList
                         data={subcategories}
                         renderItem={({ item }) => (
-                            <Card id={item.id} title={item.title} icon={item.icon} price={item.price} onPress={handleProductDetail} />
+                            <Card
+                                id={item.id}
+                                title={item.title}
+                                icon={item.icon}
+                                price={item.price}
+                                onPress={handleProductDetail}
+                            />
                         )}
                         keyExtractor={(item) => item.id}
                     />
-                ) : <>
-                    <ComboDetail data={comboData} isFetching={isFetchingComboData} setPrice={setPrice} />
-                    <View style={styles.paymentBtn}>
-                        <RegularButton title={comboPaymentButton} onPress={handleGoCart} primary />
-                    </View>
-                </>}
+                ) : (
+                    <>
+                        <ComboDetail
+                            data={comboData}
+                            isFetching={isFetchingComboData}
+                            setPrice={setPrice}
+                        />
+                        <View style={styles.paymentBtn}>
+                            <RegularButton
+                                title={comboPaymentButton}
+                                onPress={handleGoCart}
+                                primary
+                            />
+                        </View>
+                    </>
+                )}
             </View>
         </>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -75,7 +101,7 @@ const styles = StyleSheet.create({
         marginTop: 0,
         paddingBottom: 20,
         backgroundColor: WHITE,
-    }
-});
+    },
+})
 
-export default CategoryScreen;
+export default CategoryScreen

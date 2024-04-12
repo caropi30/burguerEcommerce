@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import services from '../constants/services';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import services from '../constants/services'
 
 export const burgersApi = createApi({
     reducerPath: 'burgersApi',
@@ -25,6 +25,12 @@ export const burgersApi = createApi({
             query: (user) => `users.json`,
         }),
     }),
-});
+})
 
-export const { useGetCategoriesQuery, useGetIndividualProductsQuery, useGetComboProductsQuery, useGetUserQuery, useSetUserMutation } = burgersApi;
+export const {
+    useGetCategoriesQuery,
+    useGetIndividualProductsQuery,
+    useGetComboProductsQuery,
+    useGetUserQuery,
+    useSetUserMutation,
+} = burgersApi

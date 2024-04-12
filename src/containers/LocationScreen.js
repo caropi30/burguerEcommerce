@@ -1,92 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import useHandleNavigation from '../hooks/useHandleNavigation';
-import Header from '../components/Header/Header';
-import RegularButton from '../components/RegularButton';
-import Input from '../components/Input';
-import Map from '../components/Map';
-import * as Location from 'expo-location';
-import useIdToken from '../hooks/useIdToken';
-import helpersStyle from '../constants/helpersStyle';
-import { setAddress as setAddressIdToken } from '../actions/idTokenSlice';
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import * as Location from 'expo-location'
+import useHandleNavigation from '../hooks/useHandleNavigation'
+import Header from '../components/Header/Header'
+import RegularButton from '../components/RegularButton'
+import Input from '../components/Input'
+import Map from '../components/Map'
+import useIdToken from '../hooks/useIdToken'
+import helpersStyle from '../constants/helpersStyle'
+import { setAddress as setAddressIdToken } from '../actions/idTokenSlice'
 
-const { COLORS: { ORANGE, WHITE, GRAY, BLACK } } = helpersStyle;
+const {
+    COLORS: { ORANGE, WHITE, GRAY, BLACK },
+} = helpersStyle
 
 const LocationScreen = () => {
-    const [location, setLocation] = useState({ latitude: '', longitude: '' });
-    const [errrMsg, setErrMsg] = useState(null);
-    const [address, setAddress] = useState(direccion);
-    const { address: direccion, addressIdToken } = useIdToken();
-    const dispatch = useDispatch();
+    const { address: addressIdToken } = useIdToken()
+    const [location, setLocation] = useState({ latitude: '', longitude: '' })
+    const [errrMsg, setErrMsg] = useState(null)
+    const [address, setAddress] = useState(addressIdToken.street)
+    const dispatch = useDispatch()
 
-    const { handleGoHome } = useHandleNavigation();
+    const { handleGoHome } = useHandleNavigation()
 
     useEffect(() => {
-        (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
+        ;(async () => {
+            const { status } =
+                await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
-                setError('Permiso para acceder a location: DENEGADO');
+                setErrMsg('Permiso para acceder a location: DENEGADO')
             }
 
-            let location = await Location.getCurrentPositionAsync();
+            const location = await Location.getCurrentPositionAsync()
+            console.log('LocationScreen location ----->', location)
             setLocation({
                 latitude: location.coords.latitude,
-                longitude: location.coords.longitude
-            });
+                longitude: location.coords.longitude,
+            })
         })()
-    }, []);
+    }, [])
 
     useEffect(() => {
-        (async () => {
-            if (location.latitude || direccion) {
-                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}
-                &key=AIzaSyC1iu3KVtQ709zrQ1MKLDu5KT3nILs0EVM`);
-                const data = await response.json();
+        ;(async () => {
+            if (location.latitude || addressIdToken.street) {
+                const response =
+                    await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}
+                &key=AIzaSyC1iu3KVtQ709zrQ1MKLDu5KT3nILs0EVM`)
+                const data = await response.json()
             }
-        })();
-    }, [location, address]);
-
+        })()
+    }, [location, address])
 
     const geocode = async () => {
-        const geocodedLocation = await Location.geocodeAsync(address);
-
+        console.log('en geocode')
+        const geocodedLocation = await Location.geocodeAsync(address)
+        console.log('geocodedLocation', geocodedLocation)
         setLocation({
             latitude: geocodedLocation[0].latitude,
-            longitude: geocodedLocation[0].longitude
-        });
-
-        dispatch(setAddressIdToken({
-            street: address,
-            latitude: geocodedLocation[0].latitude,
-            longitude: geocodedLocation[0].longitude
-        }));
-
-    };
+            longitude: geocodedLocation[0].longitude,
+        })
+        console.log(
+            'geocodedLocation[0].latitude',
+            geocodedLocation[0].latitude
+        )
+        dispatch(
+            setAddressIdToken({
+                street: address,
+                latitude: geocodedLocation[0].latitude,
+                longitude: geocodedLocation[0].longitude,
+            })
+        )
+    }
 
     return (
         <>
-            <Header isCart={true} title='Mi dirección' goBack={handleGoHome} />
+            <Header isCart title="Mi dirección" goBack={handleGoHome} />
             <View style={styles.container}>
-                <Map longitude={location.longitude} latitude={location.latitude} />
+                <Map
+                    longitude={addressIdToken.longitude}
+                    latitude={addressIdToken.latitude}
+                />
                 <View style={styles.address}>
-                    <Text style={styles.btnLocationTxt}>Dirección registrada</Text>
-                    {addressIdToken.street ? <Text style={styles.btnLocationSecondary} >{addressIdToken.street}</Text>
-                        : <Text style={styles.btnLocationSecondary} >No existe registro de dirección</Text>}
+                    <Text style={styles.btnLocationTxt}>
+                        Dirección registrada
+                    </Text>
+                    {addressIdToken.street ? (
+                        <Text style={styles.btnLocationSecondary}>
+                            {addressIdToken.street}
+                        </Text>
+                    ) : (
+                        <Text style={styles.btnLocationSecondary}>
+                            No existe registro de dirección
+                        </Text>
+                    )}
                 </View>
                 <View style={styles.inputs}>
-                    <Input label="¿Cuál es tu dirección?" onChangeText={(e) => setAddress(e)} value={address} placeholder="address">
-                        <Ionicons name="location-outline" size={25} color={ORANGE} placeholder="Dirección" />
+                    <Input
+                        label="¿Cuál es tu dirección?"
+                        onChangeText={(e) => setAddress(e)}
+                        value={address}
+                        placeholder="address"
+                    >
+                        <Ionicons
+                            name="location-outline"
+                            size={25}
+                            color={ORANGE}
+                            placeholder="Dirección"
+                        />
                     </Input>
                 </View>
                 <View style={styles.btn}>
-                    <RegularButton title="Confirmar dirección" primary onPress={geocode} />
+                    <RegularButton
+                        title="Confirmar dirección"
+                        primary
+                        onPress={geocode}
+                    />
                 </View>
-            </View >
+            </View>
         </>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -94,11 +129,11 @@ const styles = StyleSheet.create({
         backgroundColor: WHITE,
         alignItems: 'center',
         padding: 16,
-        paddingTop: 32
+        paddingTop: 32,
     },
     inputs: {
         marginTop: 20,
-        width: '100%'
+        width: '100%',
     },
     btn: {
         marginVertical: 16,
@@ -121,6 +156,6 @@ const styles = StyleSheet.create({
         color: BLACK,
         fontFamily: 'Montserrat-Bold',
     },
-});
+})
 
-export default LocationScreen;
+export default LocationScreen
