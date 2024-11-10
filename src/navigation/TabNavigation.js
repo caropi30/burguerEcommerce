@@ -1,9 +1,9 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
-    NavigationContainer,
     getFocusedRouteNameFromRoute,
+    NavigationContainer,
 } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import useHandleNavigation from '../hooks/useHandleNavigation'
@@ -27,53 +27,54 @@ const TabNavigation = () => {
     )
 
     const renderUserIcon = () => (
-        <TabButton title="Cuenta">
+        <TabButton title="Mi Cuenta">
             <AntDesign name="user" size={25} color={ORANGE} />
         </TabButton>
     )
 
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={{
-                    gestureEnabled: true,
+        <Tab.Navigator
+            screenOptions={{
+                gestureEnabled: true,
+            }}
+        >
+            <Tab.Screen
+                name="HomeTab"
+                component={StackNavigation}
+                options={({ route }) => ({
+                    tabBarShowLabel: false,
+                    header: () => null,
+                    tabBarIcon: renderHomeIcon,
+                    tabBarStyle: ((route) => {
+                        const routeName =
+                            getFocusedRouteNameFromRoute(route) ?? ''
+                        if (
+                            routeName === 'Splash' ||
+                            routeName === 'ProductDetail' ||
+                            routeName === 'Cart' ||
+                            routeName === 'Onboarding' ||
+                            routeName === 'Login' ||
+                            routeName === 'Location' ||
+                            routeName === 'Success' ||
+                            routeName === 'Category'
+                        ) {
+                            return { display: 'none' }
+                        }
+                        return null
+                    })(route),
+                })}
+            />
+            <Tab.Screen
+                name="Account"
+                component={AccountScreen}
+                options={{
+                    header: () => null,
+                    tabBarShowLabel: false,
+                    tabBarIcon: renderUserIcon,
+                    tabBarStyle: { display: 'none' },
                 }}
-            >
-                <Tab.Screen
-                    name="HomeTab"
-                    component={StackNavigation}
-                    options={({ route }) => ({
-                        tabBarShowLabel: false,
-                        header: () => null,
-                        tabBarIcon: renderHomeIcon,
-                        tabBarStyle: ((route) => {
-                            const routeName =
-                                getFocusedRouteNameFromRoute(route) ?? ''
-                            console.log(routeName)
-                            if (
-                                routeName === 'ProductDetail' ||
-                                routeName === 'Cart' ||
-                                routeName === 'Category' ||
-                                routeName === 'Onboarding'
-                            ) {
-                                return { display: 'none' }
-                            }
-                            return null
-                        })(route),
-                    })}
-                />
-                <Tab.Screen
-                    name="Account"
-                    component={AccountScreen}
-                    options={{
-                        header: () => null,
-                        tabBarShowLabel: false,
-                        tabBarIcon: renderUserIcon,
-                        tabBarStyle: { display: 'none' },
-                    }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
+            />
+        </Tab.Navigator>
     )
 }
 

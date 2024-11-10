@@ -1,11 +1,5 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
-import {
-    Placeholder,
-    PlaceholderMedia,
-    PlaceholderLine,
-    Fade,
-} from 'rn-placeholder'
 import helpersStyle from '../constants/helpersStyle'
 import useFont from '../hooks/useFont'
 
@@ -16,14 +10,7 @@ const {
 const TabButton = ({ onPress, children, title }) => {
     const { fontsLoaded } = useFont()
 
-    const renderSkeleton = () => {
-        ;<Placeholder
-            Animation={Fade}
-            Right={(props) => <PlaceholderMedia isRound />}
-        >
-            <PlaceholderLine width={10} style={styles.skeletonHeight} />
-        </Placeholder>
-    }
+    const renderSkeleton = () => <Text>Cargando...</Text>
 
     const renderContent = () => (
         <TouchableOpacity style={styles.btnTab} onPress={onPress}>
@@ -45,6 +32,6 @@ const styles = StyleSheet.create({
     },
     btnTabTxt: {
         fontSize: SMALL_MEDIUM,
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'Montserrat-SemiBold',
     },
 })

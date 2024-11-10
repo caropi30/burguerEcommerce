@@ -10,31 +10,35 @@ import labels from '../../constants/labels'
 import helpersStyle from '../../constants/helpersStyle'
 
 const {
-    COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK },
+    COLORS: { DARK_GRAY, ORANGE },
     FONT_SIZES: { LARGE },
 } = helpersStyle
 
-const Step3 = () => {
+const Step3 = ({ address, setAddress, house, setHouse, onPress }) => {
     const { fontLoaded } = useFont()
-    const navigation = useNavigation()
-    const handleNavigation = () => {
-        navigation.navigate('HomeStack', { screen: 'HomeScreen' })
-    }
+
     return (
         <View style={styles.container}>
             <Input
                 label="¿Cuál es tu dirección?"
-                onChangeText={() => {}}
-                value=""
+                onChangeText={(e) => setAddress(e)}
+                value={address}
+                placeholder="address"
             >
                 <Octicons name="location" size={25} color={ORANGE} />
             </Input>
-            <Input label="Casa o depto" onChangeText={() => {}} value="">
+            {/* <Input
+                label="Casa o depto"
+                onChangeText={(e) => setHouse(e)}
+                value={house}
+                placeholder="number"
+            >
                 <Entypo name="home" size={25} color={ORANGE} />
-            </Input>
+            </Input> */}
             <RegularButton
                 title="Crea tu contraseña"
-                onPress={handleNavigation}
+                onPress={onPress}
+                primary
             />
         </View>
     )

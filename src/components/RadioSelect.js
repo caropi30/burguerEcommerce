@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { RadioButtonGroup, RadioButtonItem } from 'expo-radio-button'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -11,10 +11,8 @@ const {
     FONT_SIZES: { SMALL },
 } = helpersStyle
 
-const RadioSelect = ({ radioTitle, radioData }) => {
+const RadioSelect = ({ radioTitle, radioData, radioValue, setRadioValue }) => {
     const { fontsLoaded } = useFont()
-    const [current, setCurrent] = useState('')
-    const { isFetching } = useFilterProductDetail()
 
     return (
         <View>
@@ -23,8 +21,8 @@ const RadioSelect = ({ radioTitle, radioData }) => {
             </View>
             <RadioButtonGroup
                 containerStyle={styles.radioContainerStyle}
-                selected={current}
-                onSelected={(value) => setCurrent(value)}
+                selected={radioValue}
+                onSelected={(value) => setRadioValue(value)}
                 radioBackground={ORANGE}
                 radioStyle={styles.radioBtn}
             >

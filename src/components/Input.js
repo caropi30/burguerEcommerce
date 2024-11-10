@@ -14,8 +14,8 @@ import labels from '../constants/labels'
 import helpersStyle from '../constants/helpersStyle'
 
 const {
-    COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK, WHITE },
-    FONT_SIZES: { SMALL, LARGE },
+    COLORS: { DARK_GRAY },
+    FONT_SIZES: { SMALL },
 } = helpersStyle
 
 const Input = ({
@@ -25,6 +25,7 @@ const Input = ({
     value,
     placeholder,
     isError,
+    isSecure,
 }) => {
     const { fontLoaded } = useFont()
     const navigation = useNavigation()
@@ -37,6 +38,7 @@ const Input = ({
             <View style={styles.input}>
                 <TextInput
                     onChangeText={onChangeText}
+                    secureTextEntry={isSecure}
                     value={value}
                     placeholder={placeholder}
                 />

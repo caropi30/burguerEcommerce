@@ -4,6 +4,7 @@ import Entypo from '@expo/vector-icons/Entypo'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import helpersStyle from '../constants/helpersStyle'
 import useHandleNavigation from '../hooks/useHandleNavigation'
+import useIdToken from '../hooks/useIdToken'
 
 const {
     COLORS: { ORANGE, WHITE, BLACK, BORDER_GRAY, GRAY, BG_LIGHT_ORANGE },
@@ -11,18 +12,22 @@ const {
 } = helpersStyle
 
 const LocationButton = () => {
-    const { handleGoOnboarding } = useHandleNavigation()
+    const { handleGoLocation } = useHandleNavigation()
+    const { address } = useIdToken()
+    console.log('LocationButton address ----->', address)
+    // console.log('LocationButton addressIdToken ----->', addressIdToken)
+    // console.log('LocationButton street ----->', street)
+
     return (
-        <TouchableOpacity
-            style={styles.btnLocation}
-            onPress={handleGoOnboarding}
-        >
+        <TouchableOpacity style={styles.btnLocation} onPress={handleGoLocation}>
             <Entypo name="location" size={24} color={ORANGE} />
             <View style={styles.btnLocationHome}>
                 <View>
                     <Text style={styles.btnLocationTxt}>Entregar en</Text>
                     <Text style={styles.btnLocationSecondary}>
-                        Agrega tu dirección
+                        {!address.street
+                            ? 'Agrega tu dirección'
+                            : address.street}
                     </Text>
                 </View>
                 <MaterialCommunityIcons
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         backgroundColor: BG_LIGHT_ORANGE,
+        width: '100%',
     },
     btnArrow: {
         justifyContent: 'center',

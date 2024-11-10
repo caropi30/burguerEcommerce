@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native'
+import { Text, StyleSheet, TextInput, ScrollView } from 'react-native'
 import Card from './Card'
 import RadioSelect from './RadioSelect'
 import CheckboxSelect from './CheckBoxSelect/CheckboxSelect'
@@ -7,6 +7,7 @@ import RegularButton from './RegularButton'
 import helpersStyle from '../constants/helpersStyle'
 import labels from '../constants/labels'
 import useFont from '../hooks/useFont'
+import useHandleNavigation from '../hooks/useHandleNavigation'
 
 const {
     COLORS: { BLACK },
@@ -24,51 +25,69 @@ const ProductDetail = ({
     radioTitle,
     checkboxTitle,
     radioData,
+    radioValue,
+    setRadioValue,
     checkboxData,
+    checkboxes,
+    setCheckboxes,
+    selectedBoxes,
+    setSelectedBoxes,
     secondaryCheckBox,
     secondaryCheckBoxTitle,
+    secondaryCheckboxes,
+    setSecondaryCheckboxes,
+    secondarySelectedBoxes,
+    setSecondarySelectedBoxes,
     price,
 }) => {
     const { fontsLoaded } = useFont()
+    const { handleGoCart } = useHandleNavigation()
 
     return (
-        <>
-            <ScrollView indicatorStyle="white">
-                <Card title={cardTitle} icon={icon} />
-                <Text style={styles.title}>{title}</Text>
-                {radioData && (
-                    <RadioSelect
-                        radioTitle={radioTitle}
-                        radioData={radioData}
-                    />
-                )}
-                {checkboxData && (
-                    <CheckboxSelect
-                        title={checkboxTitle}
-                        checkboxData={checkboxData}
-                    />
-                )}
-                {secondaryCheckBox && (
-                    <CheckboxSelect
-                        title={secondaryCheckBoxTitle}
-                        checkboxData={secondaryCheckBox}
-                    />
-                )}
-                <Text style={styles.textComment}>{COMMENT}</Text>
-                <TextInput
-                    placeholder="Añadir comentario"
-                    placeholderTextColor={BLACK}
-                    autoCapitalize="words"
-                    caretHidden
-                    inputMode="text"
-                    maxLength={140}
-                    multiline
-                    numberOfLines={3}
-                    style={styles.textArea}
+        <ScrollView indicatorStyle="white">
+            <Card title={cardTitle} icon={icon} />
+            <Text style={styles.title}>{title}</Text>
+            {radioData && (
+                <RadioSelect
+                    radioTitle={radioTitle}
+                    radioData={radioData}
+                    radioValue={radioValue}
+                    setRadioValue={setRadioValue}
                 />
-            </ScrollView>
-            <RegularButton title={BTN_CART} price={price} />
-        </>
+            )}
+            {checkboxes && (
+                <CheckboxSelect
+                    title={checkboxTitle}
+                    checkboxData={checkboxData}
+                    checkboxes={checkboxes}
+                    setCheckboxes={setCheckboxes}
+                    selectedBoxes={selectedBoxes}
+                    setSelectedBoxes={setSelectedBoxes}
+                />
+            )}
+            {secondaryCheckboxes && (
+                <CheckboxSelect
+                    title={secondaryCheckBoxTitle}
+                    checkboxData={secondaryCheckBox}
+                    checkboxes={secondaryCheckboxes}
+                    setCheckboxes={setSecondaryCheckboxes}
+                    selectedBoxes={secondarySelectedBoxes}
+                    setSelectedBoxes={setSecondarySelectedBoxes}
+                />
+            )}
+            <Text style={styles.textComment}>{COMMENT}</Text>
+            <TextInput
+                placeholder="Añadir comentario"
+                placeholderTextColor={BLACK}
+                autoCapitalize="words"
+                caretHidden
+                inputMode="text"
+                maxLength={140}
+                multiline
+                numberOfLines={3}
+                style={styles.textArea}
+            />
+        </ScrollView>
     )
 }
 

@@ -10,7 +10,7 @@ import helpersStyle from '../../constants/helpersStyle'
 import RegularButton from '../RegularButton'
 
 const {
-    COLORS: { DARK_GRAY, GRAY, ORANGE, BLACK },
+    COLORS: { DARK_GRAY, ORANGE },
     FONT_SIZES: { SMALL, LARGE },
 } = helpersStyle
 
@@ -64,7 +64,7 @@ const Step1 = ({
                     />
                 </Input>
             </View>
-            <RegularButton title="Continuar" onPress={handleStep} />
+            <RegularButton title="Continuar" onPress={handleStep} primary />
         </>
     )
 }

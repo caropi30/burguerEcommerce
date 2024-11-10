@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    ScrollView,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { View, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
 import Header from '../components/Header/Header'
 import RegularButton from '../components/RegularButton'
-import CartItem from '../components/Cart/CartItem'
 import CartItemList from '../components/Cart/CartItemList'
 import CartResumen from '../components/Cart/CartResumen'
 import helpersStyle from '../constants/helpersStyle'
 import labels from '../constants/labels'
 import useHandleNavigation from '../hooks/useHandleNavigation'
+import useGetCart from '../hooks/useGetCart'
+import useGetProductInfo from '../hooks/useGetProductInfo'
+import { setTotal as setTotalCart, setClearCart } from '../actions/cartSlice'
 
 const {
     COLORS: { WHITE },
@@ -30,12 +26,18 @@ const {
 } = labels
 
 const CartScreen = () => {
+    const [total, setTotal] = useState(0)
     const [payment, setPayment] = useState(false)
-    const { handleGoHome } = useHandleNavigation()
-    const navigation = useNavigation()
-    const handleNavigation = () => {
-        navigation.navigate('HomeStack', { screen: 'HomeScreen' })
-    }
+    const { productInfo } = useGetProductInfo()
+    console.log('productInfo', productInfo)
+    const { cart } = useGetCart()
+    console.log('cart cart', cart)
+    const { handleGoHome, handleGoSuccess } = useHandleNavigation()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(setTotalCart())
+    }, [payment])
 
     const handleGoBack = () => {
         setPayment(!payment)
@@ -46,12 +48,9 @@ const CartScreen = () => {
     }
 
     const handlePagar = () => {
-        handleGoHome()
+        dispatch(setClearCart())
+        handleGoSuccess()
     }
-
-    useEffect(() => {
-        console.log('payment', payment)
-    }, [payment])
 
     return (
         <>
@@ -60,13 +59,25 @@ const CartScreen = () => {
                 title={!payment ? CARRITO : PAGO}
                 goBack={!payment ? handleGoHome : handleGoBack}
             />
-            <ScrollView style={styles.container}>
-                {!payment ? <CartItemList /> : <CartResumen />}
-                <RegularButton
-                    onPress={!payment ? handleContinue : handlePagar}
-                    title={!payment ? BTN_CONTINUE : BTN_PAGAR}
-                />
-            </ScrollView>
+            <View style={styles.container}>
+                <View>
+                    {!payment ? (
+                        <CartItemList
+                            data={cart.items.length <= 0 ? null : cart.items}
+                            quantityController
+                        />
+                    ) : (
+                        <CartResumen data={cart.items} subtotal={cart.total} />
+                    )}
+                </View>
+                <View style={styles.paymentBtn}>
+                    <RegularButton
+                        onPress={!payment ? handleContinue : handlePagar}
+                        title={!payment ? BTN_CONTINUE : BTN_PAGAR}
+                        primary
+                    />
+                </View>
+            </View>
         </>
     )
 }
@@ -77,6 +88,11 @@ const styles = StyleSheet.create({
         backgroundColor: WHITE,
         paddingHorizontal: 16,
         paddingTop: 32,
+    },
+    paymentBtn: {
+        backgroundColor: WHITE,
+        marginTop: 32,
+        paddingBottom: 20,
     },
 })
 

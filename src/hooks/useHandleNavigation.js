@@ -8,11 +8,11 @@ const useHandleNavigation = () => {
         navigation.navigate('HomeStack', { screen: 'HomeScreen' })
     }
 
-    const handleGoCategory = () =>
-        navigation.navigate('Category', { screen: 'CategoryScreen' })
+    const handleGoCategory = (params) =>
+        navigation.navigate('Category', { screen: 'CategoryScreen', ...params })
 
-    const handleGoCart = () =>
-        navigation.navigate('Cart', { screen: 'CartScreen' })
+    const handleGoCart = (params) =>
+        navigation.navigate('Cart', { screen: 'CartScreen', ...params })
 
     const handleProductDetail = () =>
         navigation.navigate('ProductDetail', { screen: 'ProductDetailScreen' })
@@ -26,6 +26,12 @@ const useHandleNavigation = () => {
     const handleGoOnboarding = () =>
         navigation.navigate('Onboarding', { screen: 'OnboardingScreen' })
 
+    const handleGoLogin = () =>
+        navigation.navigate('Login', { screen: 'LoginScreen' })
+
+    const handleGoSuccess = () =>
+        navigation.navigate('Success', { screen: 'SuccessScreen' })
+
     return {
         handleGoAccount,
         handleGoCategory,
@@ -33,6 +39,9 @@ const useHandleNavigation = () => {
         handleGoHome,
         handleProductDetail,
         handleGoOnboarding,
+        handleGoLocation,
+        handleGoLogin,
+        handleGoSuccess,
     }
 }
 

@@ -3,18 +3,10 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import helpersStyle from '../constants/helpersStyle'
 import useFont from '../hooks/useFont'
-import { setTitle } from '../actions/titleSlice'
 import { setProductInfo } from '../actions/productInfoSlice'
 
 const {
-    COLORS: {
-        WHITE,
-        BLACK,
-        ORANGE,
-        BG_LIGHT_ORANGE,
-        BG_LIGHT_GRAY,
-        BORDER_YELLOW,
-    },
+    COLORS: { BLACK, BG_LIGHT_ORANGE, BORDER_YELLOW },
     FONT_SIZES: { SMALL, XX_LARGE },
 } = helpersStyle
 
@@ -23,8 +15,6 @@ const Card = ({ id, onPress, icon, title }) => {
     const dispatch = useDispatch()
 
     const handleData = async (param) => {
-        console.log('PARAM CARD', param)
-        await dispatch(setTitle(param.title))
         await dispatch(setProductInfo(param))
         await onPress()
     }

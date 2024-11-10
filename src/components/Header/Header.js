@@ -1,12 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import {
-    Placeholder,
-    PlaceholderMedia,
-    PlaceholderLine,
-    Fade,
-} from 'rn-placeholder'
 import helpersStyle from '../../constants/helpersStyle'
 import useFont from '../../hooks/useFont'
 import CartButton from './components/CartButton'
@@ -22,19 +15,20 @@ const Header = ({ isHome, isLoading, goBack, isCart, title, isOnboarding }) => {
     const headerSkeleton = () => (
         <View style={styles.container}>
             <View style={styles.skeletonSubcontainer}>
-                <Placeholder
-                    Animation={Fade}
-                    Right={(props) => <PlaceholderMedia isRound />}
-                >
-                    <PlaceholderLine width={85} style={styles.skeletonHeight} />
-                </Placeholder>
+                <Text>Cargando ...</Text>
             </View>
         </View>
     )
 
     const renderContent = () => (
         <View style={styles.container}>
-            <View style={styles.subcontainer}>
+            <View
+                style={
+                    !isOnboarding
+                        ? styles.subcontainer
+                        : styles.subcontainerOnboarding
+                }
+            >
                 <LocationButton
                     isHome={isHome}
                     goBack={goBack}
@@ -56,6 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: WHITE,
         paddingHorizontal: 16,
         paddingTop: 16,
+        width: '100%',
     },
     subcontainer: {
         flexDirection: 'row',
@@ -64,10 +59,18 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: 40,
         paddingBottom: 24,
-        // paddingHorizontal: 10,
         backgroundColor: WHITE,
         borderBottomWidth: 1,
         borderBottomColor: BORDER_GRAY,
+    },
+    subcontainerOnboarding: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        paddingTop: 40,
+        paddingBottom: 24,
+        backgroundColor: WHITE,
     },
     skeletonSubcontainer: {
         width: '100%',

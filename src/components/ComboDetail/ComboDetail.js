@@ -1,75 +1,78 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import { RadioButtonGroup, RadioButtonItem } from 'expo-radio-button'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { RadioButtonGroup } from 'expo-radio-button'
+import { useDispatch } from 'react-redux'
 import ComboCard from './components/ComboCard'
-import RegularButton from '../RegularButton'
 import helpersStyle from '../../constants/helpersStyle'
-import labels from '../../constants/labels'
+import { setItems } from '../../actions/cartSlice'
+import randomId from '../../utils/randomId'
 
 const {
-    COLORS: { ORANGE, BLACK, GRAY, BG_LIGHT_GRAY, BORDER_YELLOW },
-    FONT_SIZES: { X_SMALL, SMALL, X_LARGE },
+    COLORS: { ORANGE, BG_LIGHT_GRAY, BORDER_YELLOW },
 } = helpersStyle
 
-const {
-    COMBO_DETAIL: { PROTEINA, VEGETALES, SALSA },
-} = labels
-
-const ComboDetail = ({ id, icon, data, isFetching }) => {
+const ComboDetail = ({ id, icon, data, isFetching, setPrice }) => {
     const [current, setCurrent] = useState('')
-    console.log('current', current)
+    const [quantity, setQuantity] = useState(1)
+    const [dot, setDot] = useState(false)
+    const dispatch = useDispatch()
+
     return (
         <>
             {isFetching ? (
                 <Text>Cargando...</Text>
             ) : (
-                <>
-                    <ScrollView
-                        indicatorStyle="white"
-                        contetContainerStyle={styles.container}
-                    >
-                        <View style={styles.container}>
-                            <RadioButtonGroup
-                                containerStyle={styles.radioContainerStyle}
-                                selected={current}
-                                onSelected={(value) => setCurrent(value)}
-                                radioBackground={ORANGE}
-                                radioStyle={styles.radioBtn}
-                            >
-                                {data?.map((item, index) => (
-                                    <ComboCard
-                                        key={item.id}
-                                        id={item.id}
-                                        icon={item.icon}
-                                        value={item.id}
-                                        title={item.title}
-                                        burgerTitle={
-                                            item.items.hamburguesa.name
+                <ScrollView
+                    indicatorStyle="white"
+                    contetContainerStyle={styles.container}
+                >
+                    <View style={styles.container}>
+                        <RadioButtonGroup
+                            containerStyle={styles.radioContainerStyle}
+                            selected={current}
+                            onSelected={(value) => setCurrent(value)}
+                            radioBackground={ORANGE}
+                            radioStyle={styles.radioBtn}
+                        >
+                            {data?.map((item, index) => (
+                                <ComboCard
+                                    key={item.id}
+                                    id={item.id}
+                                    icon={item.icon}
+                                    value={item.id}
+                                    title={item.title}
+                                    burgerTitle={item.items.hamburguesa.name}
+                                    burgerProtein={
+                                        item.items.hamburguesa.proteina
+                                    }
+                                    burgerVegatables={
+                                        item.items.hamburguesa.vegetales
+                                    }
+                                    drinkFlavors={item.items.bebida.brand}
+                                    drinkTitle={item.items.bebida.name}
+                                    chipsTitle={item.items.papas.name}
+                                    chipsType={item.items.papas.tipo}
+                                    chipsSauce={item.items.papas.salsa}
+                                    dot={dot}
+                                    onPress={() => {
+                                        {
+                                            dispatch(
+                                                setItems({
+                                                    title: item.title,
+                                                    id: randomId(),
+                                                    icon: item.icon,
+                                                    price: item.precio,
+                                                    quantity,
+                                                })
+                                            )
+                                            setPrice(item.precio)
                                         }
-                                        burgerProtein={
-                                            item.items.hamburguesa.proteina
-                                        }
-                                        burgerVegatables={
-                                            item.items.hamburguesa.vegetales
-                                        }
-                                        drinkFlavors={item.items.bebida.brand}
-                                        drinkTitle={item.items.bebida.name}
-                                        chipsTitle={item.items.papas.name}
-                                        chipsType={item.items.papas.tipo}
-                                        chipsSauce={item.items.papas.salsa}
-                                    />
-                                ))}
-                            </RadioButtonGroup>
-                        </View>
-                    </ScrollView>
-                    <View style={styles.button}>
-                        <RegularButton
-                            title="Agregar al carrito"
-                            onPress={() => console.log('Agregar al carrito')}
-                        />
+                                    }}
+                                />
+                            ))}
+                        </RadioButtonGroup>
                     </View>
-                </>
+                </ScrollView>
             )}
         </>
     )

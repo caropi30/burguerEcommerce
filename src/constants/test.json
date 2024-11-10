@@ -1,0 +1,76 @@
+{
+    "authApi": {
+        "config": {
+            "focused": true,
+            "invalidationBehavior": "delayed",
+            "keepUnusedDataFor": 60,
+            "middlewareRegistered": true,
+            "online": true,
+            "reducerPath": "authApi",
+            "refetchOnFocus": false,
+            "refetchOnMountOrArgChange": false,
+            "refetchOnReconnect": false
+        },
+        "mutations": {},
+        "provided": {},
+        "queries": {},
+        "subscriptions": {}
+    },
+    "burgersApi": {
+        "config": {
+            "focused": true,
+            "invalidationBehavior": "delayed",
+            "keepUnusedDataFor": 60,
+            "middlewareRegistered": true,
+            "online": true,
+            "reducerPath": "burgersApi",
+            "refetchOnFocus": false,
+            "refetchOnMountOrArgChange": false,
+            "refetchOnReconnect": false
+        },
+        "mutations": {},
+        "provided": {},
+        "queries": {
+            "getCategories(undefined)": [Object
+            ],
+            "getUser(undefined)": [Object
+            ]
+        },
+        "subscriptions": {
+            "getCategories(undefined)": [Object
+            ],
+            "getUser(undefined)": [Object
+            ]
+        }
+    },
+    "cart": {
+        "items": [],
+        "quantity": 0,
+        "total": 0
+    },
+    "idToken": {
+        "address": {
+            "latitude": "",
+            "longitude": "",
+            "street": ""
+        },
+        "idToken": {
+            "address": "",
+            "email": "",
+            "locaId": "",
+            "localId": "",
+            "token": ""
+        },
+        "userData": {
+            "email": "",
+            "name": "",
+            "phone": ""
+        }
+    },
+    "productInfo": {
+        "icon": "",
+        "id": "",
+        "title": ""
+    },
+    "subcategories": []
+}
