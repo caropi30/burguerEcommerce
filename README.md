@@ -10,12 +10,6 @@ E-commerce desarrollado en React NAtive , como tienda virtual de hamburguesas pa
 Es un desarrollo de entrega para el Curso CoderHouse comisión 53280.
 
 
-## Demo
-
-> ![alt text](public/images/screens/navegacion.gif "Navegación")
-
----
-
 ## Funcionalidad del proyecto
 Esta app muentra de una manera entretenida los diferentes productos que puede customizar el usuario, así como elegir productos ya armados.
 
@@ -46,7 +40,6 @@ _Detalle de Producto_
 > - **Expo Location:** 
 > - **Expo Icons:** https://react-icons.github.io/react-icons/
 > - **Expo Font:**
-> - **Expo SQLite:**
 > - **Google Fonts:**
 > - **React Navigation:**
 > - **Firebase:**
